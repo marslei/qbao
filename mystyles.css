@@ -1,0 +1,65 @@
+.mytable table,
+.mytable th,
+.mytable td {
+    border: 1px solid;
+	padding: 3px;
+}
+
+.mytable {
+	margin-top: 20px;
+}
+
+
+.goldBtn{
+	background:#ff7c1c;
+	padding: 3px 10px;
+	cursor:pointer;
+	margin-left:5px;
+	color:white;
+}
+
+.goldBtn:hover{
+	background:gray;
+}
+
+.floatLeft{
+	float:left;
+	width:65%;
+}
+.floatRight{
+	/*margin-left:0.5%;*/
+	float:right;
+	width:34.5%;
+}
+.qbaoUtils{
+	/*font-size:0.875em;*/
+	font-size:0.9em;
+	background:white;
+	width: 1200px;
+    margin: 0 auto;
+}
+.time{
+	font-size:1.5em;
+	color:white;
+	background:#ff7c1c;
+	padding:5px 0px;
+	margin: 0 auto;
+	text-align:center;
+}
+div#timer{
+	margin-top:1px;
+}
+
+.title{
+	/*display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;*/
+}
+
+#t1 caption,
+#t2 caption,
+#t3 caption,
+#t4 caption{
+	display:none;
+}

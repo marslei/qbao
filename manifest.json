@@ -1,0 +1,124 @@
+{
+	"name": "钱宝助手",
+	"manifest_version": 4,
+	"version": "1.0.0",
+	"description": "钱宝助手",
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+	"permissions": ["cookies",
+	"storage",
+	"clipboardWrite",
+	"clipboardRead",
+	"tabs",
+	"http://*.qbao.com/",
+	"https://*.qbao.com/",
+	"https://portal.qiniu.com/"],
+	"content_scripts": [{
+		"js": ["jquery-2.0.2.js",
+		"bg.js"],
+		"matches": ["<all_urls>"],
+		"run_at": "document_end"
+	},
+	{
+		"js": ["DataTables-1.10.13/media/js/jquery.dataTables.js",
+		"bg.js",
+		"html2canvas.js",
+		"fenxiao_tongji.js"],
+		"css": ["DataTables-1.10.13/media/css/jquery.dataTables.css",
+		"mystyles.css"],
+		"matches": ["https://agent.qbao.com/agent/home*"],
+		"run_at": "document_end"
+	},
+	{
+		"js": ["DataTables-1.10.13/media/js/jquery.dataTables.js",
+		"bg.js",
+		"html2canvas.js",
+		"fenxiao.js"],
+		"css": ["DataTables-1.10.13/media/css/jquery.dataTables.css",
+		"mystyles.css"],
+		"matches": ["http://agent.qbao.com/user/task/joinedAgent.html*",
+		"https://agent.qbao.com/user/task/joinedAgent.html*"],
+		"run_at": "document_end"
+	},
+	{
+		"js": ["bg.js",
+		"seeProgress.js"],
+		"matches": ["https://agent.qbao.com/fourVersion/seeProgress.html*",
+		"https://agent.qbao.com/user/task/seeProgress*",
+		"http://agent.qbao.com/user/task/seeProgress*"],
+		"run_at": "document_end"
+	},
+	{
+		"js": ["bg.js",
+		"recharge.js"],
+		"matches": ["http://www.qbao.com/wallet/recharge.html*"],
+		"run_at": "document_end"
+	},
+	{
+		"js": ["html2canvas.js",
+		"bg.js",
+		"qianbaoLogin.js"],
+		"matches": ["https://passport.qbao.com/cas/qianbaoLogin*"],
+		"run_at": "document_end"
+	},
+	{
+		"js": ["bg.js",
+		"qbaoIndex.js"],
+		"matches": ["http://www.qbao.com/index.html",
+		"http://www.qbao.com/",
+		"https://www.qbao.com/index.html",
+		"https://www.qbao.com/"],
+		"run_at": "document_end"
+	},
+	{
+		"js": ["html2canvas.js",
+		"bg.js",
+		"userIndex.js"],
+		"matches": ["https://user.qbao.com/itallFour/userIndex.htm"],
+		"run_at": "document_end"
+	},
+	{
+		"js": ["bg.js",
+		"fuelRecharge.js"],
+		"matches": ["https://vc.qbao.com/fuel/recharge.htm"],
+		"run_at": "document_end"
+	},
+	{
+		"js": ["bg.js",
+		"phoneRecharge.js"],
+		"matches": ["https://vc.qbao.com/web/phone-recharge.htm"],
+		"run_at": "document_end"
+	},
+	{
+		"js": ["bg.js",
+		"payportal.js"],
+		"matches": ["https://payportal.qbao.com/payportal/main.html",
+		"http://payportal.qbao.com/payportal/main.html"],
+		"run_at": "document_end"
+	},
+	{
+		"js": ["bg.js",
+		"compass.js"],
+		"matches": ["https://sign.qbao.com/compass/index.html"],
+		"run_at": "document_end"
+	},
+	{
+		"js": ["bg.js",
+		"下单.js"],
+		"matches": ["https://unifypay.qbao.com/unified/pcpay/gateway/order/toPay.html*"],
+		"run_at": "document_end"
+	},
+	{
+		"js": ["DataTables-1.10.13/media/js/jquery.dataTables.js",
+		"bg.js",
+		"html2canvas.js",
+		"assetDetail.js"],
+		"matches": ["https://payportal.qbao.com/assetDetail/assetDetail.html",
+		"http://payportal.qbao.com/assetDetail/assetDetail.html"],
+		"css": ["DataTables-1.10.13/media/css/jquery.dataTables.css",
+		"mystyles.css"],
+		"run_at": "document_end"
+	}]
+}
