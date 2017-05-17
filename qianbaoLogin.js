@@ -7,7 +7,7 @@ LoginInterval = setInterval(function(){
 
 
 refreshInterval = setInterval(function(){
-	console.log('自动刷新');
+	log('自动刷新');
 	window.location.reload();
 },300000);
 
@@ -19,7 +19,7 @@ function login(){
 	}
 	window.clearInterval(LoginInterval);
 	code_imageImg = src;
-	console.log(code_imageImg);
+	log(code_imageImg);
 
 
 	Subject = '请求自动登录['+getNowFormatDate()+']';
@@ -27,7 +27,7 @@ function login(){
 	body = $("<img/>", {"src":code_imageImg});
 	log
 
-	console.log(body.outerHTML());
+	log(body.outerHTML());
 	log
 	sendMail(Subject, $(".code_image").outerHTML(), null);
 	log

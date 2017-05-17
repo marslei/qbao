@@ -2,7 +2,7 @@
  * @author Administrator
  */
 function removeSurvey(){
-	console.log("removeSurvey");
+	log("removeSurvey");
 	$("#user_shadow").remove();
 	$("#tixianwenjuan").remove();
 }

@@ -4,7 +4,7 @@ pageInterval = setInterval(function(){
 	}
 	$(".num").click(function(){
 		$(this).selectText();
-		console.log($(this).text());
+		log($(this).text());
 		document.execCommand('copy');
 		notifyMe($(this).text() +" 已复制");
 
@@ -23,7 +23,7 @@ pageInterval = setInterval(function(){
 	href = $("a:contains(进行中的分销)").attr("href");
 	if(href != null){
 		openNewBackgroundTab(href);
-		console.log('打开分销任务');
+		log('打开分销任务');
 		window.clearInterval(打开分销任务);
 	}
 },2000);

@@ -1,12 +1,12 @@
 pageMonitor = setInterval(function(){
 	owerMoney = $(".ower-money").text();
-	console.log(owerMoney);
+	log(owerMoney);
 
 
 	baoquan = /.+?(\d+)宝券/.exec(owerMoney)[1];
 	if(baoquan > 0){
 		window.clearInterval(pageMonitor);
-		console.log(baoquan);
+		log(baoquan);
 	}
 	else
 	{
@@ -15,15 +15,15 @@ pageMonitor = setInterval(function(){
 
 
 	if(baoquan >= 140000){
-		console.log("选择充1000");
+		log("选择充1000");
 		$(".check div:contains(1000元)").click();
 	}
 	else if(baoquan >= 70000){
-		console.log("选择充500");
+		log("选择充500");
 		$(".check div:contains(500元)").click();
 	}	
 	else if(baoquan >= 14000){
-		console.log("选择充100");
+		log("选择充100");
 		$(".check div:contains(100元)").click();
 	}
 

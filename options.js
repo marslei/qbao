@@ -26,8 +26,8 @@ function save_options_frequency(frequencyInSeconds){
 	save = {};
 	save["frequencyInSeconds"] = frequencyInSeconds;
 	chrome.storage.sync.set(save, function() {
-    	console.log('Settings saved');
-	    console.log("frequencyInSeconds= " + frequencyInSeconds);
+    	log('Settings saved');
+	    log("frequencyInSeconds= " + frequencyInSeconds);
 		$("#freDisplay").text(frequencyInSeconds);
 	});
 }
@@ -35,9 +35,9 @@ function save_options_frequency(frequencyInSeconds){
 log
 function restore_options_frequency(){
 	chrome.storage.sync.get("frequencyInSeconds", function (obj) {
-    	console.log(obj);
+    	log(obj);
 	 	frequencyInSeconds = obj.frequencyInSeconds;
-	    console.log("frequencyInSeconds= " + frequencyInSeconds);
+	    log("frequencyInSeconds= " + frequencyInSeconds);
 	    if (!frequencyInSeconds) {
 			frequencyInSeconds = 7;
 			save_options_frequency(frequencyInSeconds);
@@ -62,7 +62,7 @@ function requestAnnouncement(url){
 			$("#announcement").append(response);
         },
 		error: function(XMLHttpRequest, textStatus, errorThrown){
-			console.log("请求出错了");
+			log("请求出错了");
 			alert("请求出错了");
 		}
 	});

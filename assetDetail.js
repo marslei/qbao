@@ -3,7 +3,7 @@ var 日收益表;
 var 签到收益表;
 
 function init() {
-	console.log("init assetDetail.js");
+	log("init assetDetail.js");
 	setupPage();
 	setupListener();
 }
@@ -148,7 +148,7 @@ var nextPressed = false;
 function checkIsFinish(){
 	流水数 =parseInt(/共搜索到(.+)\s*条/.exec($("span:contains(共搜索到)").text())[1]);
 	if(Object.keys(obj).length ==流水数 && pageInterval !=null){
-		console.log('统计完毕');
+		log('统计完毕');
 		speak('统计完成，一共'+流水数 +'条流水');
 		notifyMe('统计完成，一共'+流水数 +'条流水');
 
@@ -177,7 +177,7 @@ function statistics(){
 
 
 			if(nextPressed == false){
-				console.log('下一页');
+				log('下一页');
 				location.href='javascript:$(".dt-pagination a:last").click();';
 				nextPressed = true;
 			}
@@ -196,7 +196,7 @@ function statistics(){
 
 		nextPressed = false;
 		currentPage = $(".dt-pagination .active").text();
-		console.log('解析第'+currentPage+'页');
+		log('解析第'+currentPage+'页');
 
 
 		log
@@ -361,7 +361,7 @@ function addTDClickListener(){
 	$("#qbaoUtils th, #qbaoUtils td").on("click", function(){
 		$(this).selectText();
 		document.execCommand('copy');
-		console.log($(this).text() +" 已复制")
+		log($(this).text() +" 已复制")
 	});
 }
 

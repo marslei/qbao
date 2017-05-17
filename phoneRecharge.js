@@ -1,13 +1,13 @@
 
 pageMonitor = setInterval(function(){
 	owerMoney = $(".money-many").text();
-	console.log(owerMoney);
+	log(owerMoney);
 
 
 	baoquan = /.+?\s*(\d+)\s*宝券/.exec(owerMoney)[1];
 	if(baoquan > 0){
 		window.clearInterval(pageMonitor);
-		console.log(baoquan);
+		log(baoquan);
 	}
 	else
 	{
@@ -16,19 +16,19 @@ pageMonitor = setInterval(function(){
 
 
 	if(baoquan >= 70000){
-		console.log("选择充500");
+		log("选择充500");
 		$(".m-select dd:contains(500元)").click();
 	}	
 	else if(baoquan >= 42000){
-		console.log("选择充300");
+		log("选择充300");
 		$(".m-select dd:contains(300元)").click();
 	}	
 	else if(baoquan >= 28000){
-		console.log("选择充200");
+		log("选择充200");
 		$(".m-select dd:contains(200元)").click();
 	}	
 	else if(baoquan >= 14000){
-		console.log("选择充100");
+		log("选择充100");
 		$(".m-select dd:contains(100元)").click();
 	}
 	$(".m-select dd:contains(100元)").click();
@@ -48,7 +48,7 @@ confirmInterval = setInterval(function(){
 	}
 
 	if($(".error").is(":visible") == true){
-		console.log("报错了，不提交");
+		log("报错了，不提交");
 		window.clearInterval(confirmInterval);
 	}
 },

@@ -6,7 +6,7 @@ function blockAd(suspectedAd,attr){
 	if(is_qianbao666(target)){
 		return;
 	}
-	console.log("block "+target);
+	log("block "+target);
 	suspectedAd.remove();
 }
 

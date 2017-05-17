@@ -4,7 +4,7 @@ $(".jl-detail em").click(function(){
 
 function copyThis(element){
 	$(element).selectText();
-	console.log($(element).text());
+	log($(element).text());
 	document.execCommand('copy');
 	notifyMe($(element).text() +" 已复制");
 }

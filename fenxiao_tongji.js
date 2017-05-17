@@ -1,5 +1,5 @@
 function init() {
-	console.log("init fenxiao_tongji.js");
+	log("init fenxiao_tongji.js");
 	speak('分销统计');
 	setupPage();
 
@@ -36,14 +36,14 @@ function setupListener() {
 			log
 		log
 		test();
-		console.log(currentPage);
+		log(currentPage);
 		log
 
 	},500);
 
 
 	$("#print").click(function(){
-		console.log("打印");
+		log("打印");
 		print($('#marsTable').parent());
 	});
 
@@ -74,7 +74,7 @@ function test() {
 
 			if(obj.hasOwnProperty(url)){
 				if(Object.keys(obj).length == 任务数 && pageInterval != null){
-					console.log('统计完毕');
+					log('统计完毕');
 					window.clearInterval(pageInterval);
 					pageInterval = null;
 					speak('统计完成，一共'+任务数+'个任务');
@@ -137,7 +137,7 @@ function test() {
 	log
 	addTDClickListener();
 	if(currentIndex >= $(rows).length){
-		console.log("下一页");
+		log("下一页");
 		$(".md_page_area_fore_icon").click();
 	}
 }
@@ -145,7 +145,7 @@ function addTDClickListener(){
 	$("#marsTable th, #marsTable td").on("click", function(){
 		$(this).selectText();
 		document.execCommand('copy');
-		console.log($(this).text() +" 已复制")
+		log($(this).text() +" 已复制")
 	});
 }
 function toPercent(data){
