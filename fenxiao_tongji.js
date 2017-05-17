@@ -6,15 +6,14 @@ function init() {
 	setupListener();
 	$("#adWraper table").dblclick(function(){
 		$(this).find("tbody").selectText();
-		
+
+
 		log
 		document.execCommand('copy');
 		sendMail('分销收益统计['+getNowFormatDate()+']',$(this).outerHTML(), null);
 		log
 	});
 }
-
-
 
 
 init();
@@ -41,12 +40,14 @@ function setupListener() {
 		log
 
 	},500);
-	
+
+
 	$("#print").click(function(){
 		console.log("打印");
 		print($('#marsTable').parent());
 	});
-	
+
+
 }
 
 log
@@ -69,7 +70,8 @@ function test() {
 			log
 			url = $(this).find('a').attr('href');
 			任务数 = /共(.+)\s*条/.exec($(".md_page_info").text())[1];
-			
+
+
 			if(obj.hasOwnProperty(url)){
 				if(Object.keys(obj).length == 任务数 && pageInterval != null){
 					console.log('统计完毕');
@@ -88,7 +90,8 @@ function test() {
 			empty = false;
 			任务名称 = $(this).find(".hall_list_data_title").text();
 			收益 = $($(this).find(".hall_list_data_info .hall_list_data_label")[0]).find('.abs_word em').text().trim().replace(/[^\d\.]/g,'');
-			
+
+
 			保证金 = $($(this).find(".hall_list_data_info .hall_list_data_label")[2]).find('.hall_list_data_info_attr span').text().trim().replace(/[^\d\.]/g,'');
 
 			任务天数 = $($(this).find(".hall_list_data_info .hall_list_data_label")[3]).find('.hall_list_data_info_attr span').text().trim().replace(/[^\d\.]/g,'');
@@ -96,7 +99,7 @@ function test() {
 			万元每天收益 = 收益 > 0 ? (((收益 / 保证金) / 任务天数) * 10000).toFixed(2) : 0;
 			log
 
-			
+
 			任务 = {};
 			任务.任务名称 = 任务名称;
 			任务.收益 = 收益;
@@ -107,12 +110,14 @@ function test() {
 			任务.年化收益率 = 万元每天收益*365/10000
 			任务.年复利 = Math.pow(1.0 + 任务.月_30天_收益率, 12)-1;
 			任务.url = url;
-			
+
+
 			array[index] = 任务;
 			index++;
 			log
 			obj[url]=任务;
-			
+
+
 			t.row.add([
 				null,
 				"<a target='_blank' href='"+任务.url+"'+>" + 任务.任务名称 + "</a>",
@@ -156,7 +161,8 @@ function format(num) {
 
 function 做表头(){
 	statisticsTable = $('<table id="marsTable" align="left" width="95%" class="hover stripe" cellspacing="0"></table>');
-	
+
+
 	thead = $('<thead></thead>');
 	tfoot = $('<tfoot></tfoot>');
 	tr = $('<tr></tr>');
@@ -167,7 +173,8 @@ function 做表头(){
 	th = $('<th align="left"></th>');
 	th.append('任务名称');
 	tr.append(th);
-	
+
+
 	th = $('<th align="left"></th>');
 	th.append('收益(元)');
 	tr.append(th);
@@ -175,11 +182,13 @@ function 做表头(){
 	th = $('<th align="left"></th>');
 	th.append('保证金(元)');
 	tr.append(th);
-	
+
+
 	th = $('<th align="left"></th>');
 	th.append('任务天数');
 	tr.append(th);
-	
+
+
 	th = $('<th align="left"></th>');
 	th.append('万元日收益(元)');
 	tr.append(th);
@@ -188,17 +197,20 @@ function 做表头(){
 	th.append('月收益率(30天)');
 	tr.append(th);
 	thead.append(tr);
-	
+
+
 	th = $('<th align="left"></th>');
 	th.append('年化收益率');
 	tr.append(th);
 	thead.append(tr);
-	
+
+
 	th = $('<th align="left"></th>');
 	th.append('年化(复利)');
 	tr.append(th);
 	thead.append(tr);
-	
+
+
 	log
 	$(statisticsTable).append(thead);
 	log
@@ -213,7 +225,8 @@ function 做表头(){
         } ],
         "order": [[5, 'desc']]
 	});
-	
+
+
 	t.on( 'order.dt search.dt', function () {
         t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
             cell.innerHTML = i+1;
@@ -222,12 +235,10 @@ function 做表头(){
 }
 
 
-
 function speak(content) {
     var msg = new SpeechSynthesisUtterance(content);
 	window.speechSynthesis.speak(msg);
 }
-
 
 
 function notifyMe(info) {
@@ -265,14 +276,4 @@ function notifyMe(info) {
   log
   log
 }
-
-
-
-
-
-
-
-
-
-
 

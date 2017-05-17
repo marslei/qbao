@@ -35,7 +35,8 @@ function checkProgress(){
 			closeThisWindow(10*1000);
 			return true;
 		}
-		
+
+
 	}
 	return false;
 }
@@ -70,7 +71,8 @@ if(taskType == 0){
 }
 else if(taskType == 1){
 	console.log('广告任务');
-	
+
+
 	adTaskInterval = setInterval(function(){
 		statusTxt = $(".status-txt").text();
 		if(statusTxt == null){
@@ -85,7 +87,8 @@ else if(taskType == 1){
 		}
 	},
 	1000);
-	
+
+
 }
 else{
 	console.log('为止类型，暂不处理');
@@ -109,12 +112,14 @@ function start2(){
 
 
 function startWork(){
-	
+
+
 	currentInterval = setInterval(function(){
 		if($(".step-btn").is(":visible") == false){
 			return;
 		}
-		
+
+
 		var text = $(".step-btn").text();
 		console.log(text);
 		if (/下.*/.test(text)) {
@@ -126,15 +131,16 @@ function startWork(){
 		else if (/去答题.*/.test(text)) {
 			$('.timer .step-btn').click();
 			window.clearInterval(currentInterval);
-			
+
+
 			problem = $(".problem-answer .desc").text().trim();
 			console.log(problem);
 			bzj = $(".info .red").text();
 			console.log("保证金"+bzj);
 			bzj =/.*10,000.*/.test(bzj);
 			bzj2 =/.*20,000.*/.test(bzj);
-			
-			
+
+
 			if(/.*商家名称是鑫洋家居馆吗？.*/.test(problem)||
 			   /.*该分销周期是23天吗.*/.test(problem)||
 			   /.*店铺主营家居类商品吗.*/.test(problem)||
@@ -181,11 +187,12 @@ function startWork(){
 			}
 			window.location = "javascript:$('.problem-answer .btn').click()";
 		}
-		
-		
+
+
 		if(/提交答案.*/.test(text)){
 			window.clearInterval(currentInterval);
-			
+
+
 			if($(".val-n").hasClass("checked-radio") || 
 			   $(".val-y").hasClass("checked-radio")){
 				$(".answer-btn").click();
@@ -199,7 +206,8 @@ function startWork(){
 			return;
 		}
 		window.clearInterval(progressNumInterval);
-		
+
+
 		progressNum = $(".progress-num").text();
 		console.log(progressNum);
 		if(/3\/3/.test(progressNum)){
@@ -221,14 +229,16 @@ function startWork(){
 
 		window.clearInterval(checkinInterval);
 		window.location = "javascript:+$('.checkin-img-wrapper .checkin-icon').click()";
-		
+
+
 	},1000);
 
 	setInterval(function(){
 		if($(".continue-btn").is(":visible") == false){
 			return;
 		}
-		
+
+
 		continueBtn = $(".continue-btn:visible").text();
 		console.log(continueBtn);
 		if(/继续任务.*/.test(continueBtn)){
@@ -236,7 +246,8 @@ function startWork(){
 		}else{
 			console.log("今日已完成");
 		}
-		
+
+
 	},1000);
 
 	shareInterval = setInterval(function(){
@@ -244,9 +255,11 @@ function startWork(){
 			return;
 		}
 		window.clearInterval(shareInterval);
-		
+
+
 		window.location = "javascript:var qq = $('.qq'); qq.removeClass('qq'); qq.click();";
-		
+
+
 	},1000);	
 
 	sliderInterval = setInterval(function(){
@@ -255,7 +268,8 @@ function startWork(){
 		}
 		window.clearInterval(sliderInterval);
 		console.log('绕过滑块');
-		
+
+
 		setTimeout(function(){
 			$('.slider-wrap').hide();
 			$('.timer').show();
@@ -274,17 +288,16 @@ function startWork(){
 }
 
 
-
-
-
 function startADTaskWork(){
 	window.location = "javascript:$('.study-btn').click();";
-	
+
+
 	currentInterval = setInterval(function(){
 		if($(".step-btn").is(":visible") == false){
 			return;
 		}
-		
+
+
 		var text = $(".step-btn").text();
 		console.log(text);
 		if (/下.*/.test(text)) {
@@ -295,7 +308,8 @@ function startADTaskWork(){
 		} else if (/完成.*/.test(text)) {
 			$('.timer .step-btn').click();
 		}
-		
+
+
 	},1000);
 
 	sliderInterval2 = setInterval(function(){
@@ -304,7 +318,8 @@ function startADTaskWork(){
 		}
 		window.clearInterval(sliderInterval2);
 		console.log('绕过滑块');
-		
+
+
 		setTimeout(function(){
 			$('.slider-wrap').hide();
 			$('.timer').show();

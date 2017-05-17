@@ -2,7 +2,8 @@
 pageMonitor = setInterval(function(){
 	owerMoney = $(".money-many").text();
 	console.log(owerMoney);
-	
+
+
 	baoquan = /.+?\s*(\d+)\s*宝券/.exec(owerMoney)[1];
 	if(baoquan > 0){
 		window.clearInterval(pageMonitor);
@@ -12,7 +13,8 @@ pageMonitor = setInterval(function(){
 	{
 		return;
 	}
-	
+
+
 	if(baoquan >= 70000){
 		console.log("选择充500");
 		$(".m-select dd:contains(500元)").click();
@@ -33,7 +35,8 @@ pageMonitor = setInterval(function(){
 
 	$("#activeOne").click();
 	$("#recharge").click();
-	
+
+
 	log
 },
 1000);

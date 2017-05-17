@@ -20,8 +20,8 @@ function login(){
 	window.clearInterval(LoginInterval);
 	code_imageImg = src;
 	console.log(code_imageImg);
-	
-	
+
+
 	Subject = '请求自动登录['+getNowFormatDate()+']';
 	log
 	body = $("<img/>", {"src":code_imageImg});

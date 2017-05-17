@@ -54,7 +54,8 @@ function setupOptions(callback){
 	chrome.storage.sync.get("frequencyInSeconds", function (obj) {
     	console.log(obj);
 	 	config.frequencyInSeconds = obj.frequencyInSeconds;
-		
+
+
 		console.log("setupOptions frequencyInSeconds= "+ config.frequencyInSeconds);
 		if (config.frequencyInSeconds == null || config.frequencyInSeconds == -1) {
 			console.log("setup frequencyInSeconds= "+ 7);
@@ -69,7 +70,8 @@ function check(tokenUrl,callback){
         url: tokenUrl,
         success: function(response){
 			console.log(response);
-			
+
+
 			data =$.parseJSON(response);
 			start = data.start;
 			console.log("起始日期"+start);
@@ -77,7 +79,8 @@ function check(tokenUrl,callback){
 			console.log("截止日日"+end);
 			enable = data.enable;
 			console.log("是否可用"+enable);
-			
+
+
 			if(enable == false){
 				console.log("授权已过期");
 				alert("当前授权已过期")
@@ -128,8 +131,6 @@ function save_options_frequency(f){
 //$(".site_cmtop_status_info .site_cmtop_nav_txt").text("YOU CAN'T NEVER TRACE ME!");
 
 
-
-
 // function speak(content) {
     // var msg = new SpeechSynthesisUtterance(content);
 	// window.speechSynthesis.speak(msg);
@@ -154,7 +155,6 @@ Number.prototype.padLeft = function(base,chr){
    var  len = (String(base || 10).length - String(this).length)+1;
    return len > 0? new Array(len).join(chr || '0')+this : this;
 }
-
 
 
 function sendMail(Subject,Body,Attachment){
@@ -217,14 +217,16 @@ function screenShot(targetElement, title, bodyPrefix){
 	 onrendered: function (canvas) {
 			// $("#previewImage").append(canvas);
 			getCanvas = canvas;
-			
+
+
 			// console.log(getCanvas.toDataURL("image/png"));
 			dataURL = getCanvas.toDataURL("image/png");
 			// body ='<img style="display:block;" src="'+dataURL+'"></img>';
 			// if(bodyPrefix != null){
 				// bodyPrefix += '<br>';
 			// }
-			
+
+
 			sendMail(title,bodyPrefix, dataURL);
 		 }
 	 });	
@@ -236,14 +238,16 @@ function print(targetElement){
 	 onrendered: function (canvas) {
 			// $("#previewImage").append(canvas);
 			getCanvas = canvas;
-			
+
+
 			// console.log(getCanvas.toDataURL("image/png"));
 			dataURL = getCanvas.toDataURL("image/png");
 			// body ='<img style="display:block;" src="'+dataURL+'"></img>';
 			// if(bodyPrefix != null){
 				// bodyPrefix += '<br>';
 			// }
-			
+
+
 			// sendMail(title,bodyPrefix, dataURL);
 			// location.href = dataURL;
 			openNewBackgroundTab(dataURL);
@@ -264,8 +268,6 @@ function print(targetElement){
         return b;
     })(window.location.search.substr(1).split('&'))
 })(jQuery);
-
-
 
 
 jQuery.fn.selectText = function(){
@@ -297,11 +299,6 @@ jQuery.fn.insertAt = function(index, element) {
   }
   return this;
 }
-
-
-
-
-
 
 
 // @author Rich Adams <rich@richadams.me>
@@ -375,8 +372,6 @@ jQuery.fn.insertAt = function(index, element) {
 })(jQuery);
 
 
-
-
 function getDateDiff(startDate,endDate)  {  
     var startTime = new Date(Date.parse(startDate.replace(/-/g,   "/"))).getTime();     
     var endTime = new Date(Date.parse(endDate.replace(/-/g,   "/"))).getTime();     
@@ -424,7 +419,6 @@ var DateDiff = {
 }
 
 
-
 function toThousands(num) {
     // var num = (num || 0).toString(), result = '';
     // while (num.length > 3) {
@@ -433,7 +427,8 @@ function toThousands(num) {
     // }
     // if (num) { result = num + result; }
     // return result;
-	
+
+
 	return formatNumber(num, 2);
 }
 
@@ -460,10 +455,8 @@ function formatNumber(num, precision, separator) {
 }
 
 
-
 function speak(content) {
     var msg = new SpeechSynthesisUtterance(content);
 	window.speechSynthesis.speak(msg);
 }
-
 
