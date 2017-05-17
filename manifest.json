@@ -106,7 +106,7 @@
 	},
 	{
 		"js": ["bg.js",
-		"下单.js"],
+		"order.js"],
 		"matches": ["https://unifypay.qbao.com/unified/pcpay/gateway/order/toPay.html*"],
 		"run_at": "document_end"
 	},

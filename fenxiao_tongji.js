@@ -7,10 +7,10 @@ function init() {
 	$("#adWraper table").dblclick(function(){
 		$(this).find("tbody").selectText();
 		
-		// alert(GetSelectedText());
+		log
 		document.execCommand('copy');
 		sendMail('分销收益统计['+getNowFormatDate()+']',$(this).outerHTML(), null);
-		// screenShot($(this), '分销收益统计['+getNowFormatDate()+']', $(this).outerHTML());
+		log
 	});
 }
 
@@ -28,17 +28,17 @@ function setupPage() {
 
 var t ;
 var pageInterval ;
-// var prePage;
+log
 function setupListener() {
 	做表头();
 	pageInterval = setInterval(function(){
 		currentPage = $(".md_page_area_folio_current").text();
-		// if(prePage == currentPage){
-			// return;
-		// }
+		log
+			log
+		log
 		test();
 		console.log(currentPage);
-		// prePage = currentPage;
+		log
 
 	},500);
 	
@@ -49,7 +49,7 @@ function setupListener() {
 	
 }
 
-//This will sort your array	
+log
 function 万元每天收益排序(a, b){
   var aName = parseFloat(a.万元每天收益);
   var bName = parseFloat(b.万元每天收益); 
@@ -66,7 +66,7 @@ function test() {
 	currentIndex = 0;
 	if (rows != null && rows.length) {
 		$(rows).each(function() {
-			//url = "http://www.qbao.com"+$(this).parent().attr("data-href");
+			log
 			url = $(this).find('a').attr('href');
 			任务数 = /共(.+)\s*条/.exec($(".md_page_info").text())[1];
 			
@@ -94,7 +94,7 @@ function test() {
 			任务天数 = $($(this).find(".hall_list_data_info .hall_list_data_label")[3]).find('.hall_list_data_info_attr span').text().trim().replace(/[^\d\.]/g,'');
 
 			万元每天收益 = 收益 > 0 ? (((收益 / 保证金) / 任务天数) * 10000).toFixed(2) : 0;
-			//console.log(任务名称 + "\t" +url+ "\t"+保证金 + "\t" + 收益 + "\t" + 任务天数 + "\t" + 万元每天收益);
+			log
 
 			
 			任务 = {};
@@ -110,7 +110,7 @@ function test() {
 			
 			array[index] = 任务;
 			index++;
-			// console.log(任务);
+			log
 			obj[url]=任务;
 			
 			t.row.add([
@@ -127,9 +127,9 @@ function test() {
 			).draw();
 		});
 	}
-	// if(empty == false){
-		// window.scrollTo(0,document.body.scrollHeight+Number.MAX_SAFE_INTEGER);
-	// }
+	log
+		log
+	log
 	addTDClickListener();
 	if(currentIndex >= $(rows).length){
 		console.log("下一页");
@@ -150,7 +150,7 @@ function toPercent(data){
 }
 
 function format(num) {
-	// return num;
+	log
     return (parseFloat(num).toFixed(2) + '').replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');
 }
 
@@ -199,13 +199,13 @@ function 做表头(){
 	tr.append(th);
 	thead.append(tr);
 	
-	//tfoot.append(tr);
+	log
 	$(statisticsTable).append(thead);
-	//$(statisticsTable).append(tfoot);
+	log
 	$('#adWraper').append(statisticsTable);
 	t = $('#marsTable').DataTable({
 		paging: false,
-		// "lengthMenu": [[50, -1], [50, "All"]],
+		log
 		"columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -231,39 +231,39 @@ function speak(content) {
 
 
 function notifyMe(info) {
-  // Let's check if the browser supports notifications
+  log
   if (!("Notification" in window)) {
     alert("This browser does not support desktop notification");
   }
 
-  // Let's check if the user is okay to get some notification
+  log
   else if (Notification.permission === "granted") {
-    // If it's okay let's create a notification
-    // var notification = new Notification("Hi there!");
+    log
+    log
     var notification = new Notification(info);
   }
 
-  // Otherwise, we need to ask the user for permission
-  // Note, Chrome does not implement the permission static property
-  // So we have to check for NOT 'denied' instead of 'default'
+  log
+  log
+  log
   else if (Notification.permission !== 'denied') {
     Notification.requestPermission(function (permission) {
 
-      // Whatever the user answers, we make sure we store the information
+      log
       if(!('permission' in Notification)) {
         Notification.permission = permission;
       }
 
-      // If the user is okay, let's create a notification
+      log
       if (permission === "granted") {
-        // var notification = new Notification("Hi there!");
+        log
         var notification = new Notification(info);
       }
     });
   }
 
-  // At last, if the user already denied any notification, and you 
-  // want to be respectful there is no need to bother him any more.
+  log
+  log
 }
 
 

@@ -28,6 +28,6 @@ pageMonitor = setInterval(function(){
 	$("#bind").click();
 	$("#jlgm").click();
 	
-	// 您当前可用余额为20.56元，宝券余额为88851宝券
+	log
 },
 300);

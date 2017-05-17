@@ -1,21 +1,17 @@
-﻿// $(".site_menus_item:contains(我的购物车)").hide();
-// $(".site_menus_item:contains(任务管理)").hide();
-// $(".site_menus_item:contains(我的优惠券)").hide();
-// $(".site_menus_item:contains(红包管理)").hide();
+﻿
+var PAGE_RELOAD_INTEVERAL = 300;
+var countDown = PAGE_RELOAD_INTEVERAL;
 
-var MAX_REFRESHINTERVAL = 300;
-var rInterval = MAX_REFRESHINTERVAL;
-// $(".site_frame_foot").hide();
 refreshInterval = setInterval(function(){
-	console.log('自动刷新，倒计时'+rInterval +' ['+getNowFormatDate()+']');
-	rInterval --;
+	log('自动刷新，倒计时'+countDown +' ['+getNowFormatDate()+']');
+	countDown --;
 	
-	$("#timer").text("倒计时["+rInterval+"]秒");
-	if(rInterval > 0){
+	$("#timer").text("倒计时["+countDown+"]秒");
+	if(countDown > 0){
 		return;
 	}
-	rInterval = MAX_REFRESHINTERVAL;
-	// window.location.reload();
+	countDown = PAGE_RELOAD_INTEVERAL;
+	
 	
 	href = $("a:contains(进行中的分销)").attr("href");
 	if(href != null){
@@ -33,7 +29,7 @@ var prePage;
 
 var Subject,Body, snapshotTarget;
 function init() {
-	console.log("init fenxiao_tongji.js");
+	log("init fenxiao_tongji.js");
 	setupPage();
 	setupListener();
 }
@@ -54,15 +50,15 @@ function setupPage() {
 	var left = $("<div id='left'></div>");
 	left.addClass("floatLeft");
 	$(qbaoUtils).append(left);
-	// $(".container").append(left);
+	
 	
 	var right = $("<div id='right'></div>");
 	right.addClass("floatRight");
 	$(qbaoUtils).append(right);
-	// $(".container").append(right);
 	
-	// $(".container").append(qbaoUtils);
-	$(qbaoUtils).insertBefore(".site_frame_foot");//.append(qbaoUtils);
+	
+	
+	$(qbaoUtils).insertBefore(".site_frame_foot");
 	
 	$(".breadcrumb").append(function() {
 	  return $('<a class="goldBtn">逐一打开</a>').click(handler);
@@ -91,10 +87,10 @@ function setupListener() {
 	做表头();
 	
 	$("#qbaoUtils table tbody").dblclick(function(){
-		// tbody = $(this);
+		
 		$("#t2 tr").each(function(){
 			$(this).find(".hide").parent().hide();
-			// $(this).find("td").eq(1).hide();
+			
 		});
 		
 		$(this).selectText();
@@ -103,7 +99,7 @@ function setupListener() {
 		document.execCommand('copy');
 		$("#t2 tr").each(function(){
 			$(this).find(".hide").parent().show();
-			// $(this).find("td").eq(5).show();
+			
 		});
 	});
 	
@@ -123,17 +119,17 @@ function addTDClickListener(){
 	$("#qbaoUtils th, #qbaoUtils td").on("click", function(){
 		$(this).selectText();
 		document.execCommand('copy');
-		console.log($(this).text() +" 已复制")
+		log($(this).text() +" 已复制")
 	});
 }
 
-//This will sort your array	
+
 function SortByName(a, b){
   var aName = parseFloat(a.p.toLowerCase())/100;
   var bName = parseFloat(b.p.toLowerCase())/100; 
   return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
 }
-//This will sort your array	
+
 function 结算日期排序(a, b){
   var aName = a.结算日期;
   var bName = b.结算日期; 
@@ -153,7 +149,7 @@ function handler3(){
 			item.Subject = Subject;
 			item.body = body;
 			t[index]=item;
-		// });
+		
 	});
 	
 	$.each(t,function(k, v){
@@ -203,10 +199,10 @@ function printHandler(){
 function feideeHandler(){
 	t = [];
 	$("#t2 tbody").each(function(index){
-		// tbody = $(this);
+		
 		$("#t2 tr").each(function(){
 			$(this).find(".hide").parent().hide();
-			// $(this).find("td").eq(1).hide();
+			
 			$(this).find("td").each(function(index){
 				if(index != 1 && index !=3){
 					$(this).hide();
@@ -220,7 +216,7 @@ function feideeHandler(){
 		document.execCommand('copy');
 		$("#t2 tr").each(function(){
 			$(this).find(".hide").parent().hide();
-			// $(this).find("td").eq(1).hide();
+			
 			$(this).find("td").each(function(index){
 				if(index != 1 && index !=3){
 					$(this).show();
@@ -243,20 +239,20 @@ function handler2(){
 	startWork();
 }
 function handler(){
-	// $.each(array,)
+	
 	$.each(array,function(index,data){
-		var delay=2000*index; //1 second
-		var joinedAllState = data.joinedAllState;//$(data).find(".joined-allState").text().trim();
+		var delay=2000*index; 
+		var joinedAllState = data.joinedAllState;
 		if(joinedAllState != '今日未完成'){
 			return;
 		}
-		console.log((index+1) + joinedAllState);
+		log((index+1) + joinedAllState);
 		setTimeout(function() {
 			speak(index+1);
-			// var fxId = data.;//$(data).find(".process-btn").attr('data-id');
-			// var taskType = $(data).find(".process-btn").attr('task-type');
+			
+			
 			seeProgress = data.seeProgress;
-			// openNewBackgroundTab("http://agent.qbao.com/user/task/seeProgress?userFxId="+fxId+"&isSettled=0&taskType="+taskType+"&siteMenus=11");
+			
 			openNewBackgroundTab(seeProgress);
 		}, delay);
 		
@@ -281,14 +277,14 @@ function statistics(){
 		taskType = $(data).find("a[data-id]").attr('task-type');
 		保证金 =$(data).parent().find(".fr").text();
 		保证金 = 保证金.replace(/[^\d\.]/g, '');
-		// console.log(fxId + ':'+保证金);
+		
 
 		
 		任务数 = /共(.+)\s*条/.exec($(".data-status").text())[1];
 		
 		if(obj.hasOwnProperty(fxId)){
 			if(Object.keys(obj).length == 任务数 && pageInterval !=null){
-				console.log('统计完毕');
+				log('统计完毕');
 				speak('统计完成，一共'+任务数+'个分销任务');
 				notifyMe('统计完成，一共'+任务数+'个分销任务');
 				
@@ -296,8 +292,8 @@ function statistics(){
 				window.clearInterval(pageInterval);
 				pageInterval = null;
 				
-				// addTDClickListener();
-				console.log('启动逐一打开检测');
+				
+				log('启动逐一打开检测');
 				handler();
 				
 
@@ -305,7 +301,7 @@ function statistics(){
 			}
 			
 			if(nextPressed == false){
-				console.log('下一页');
+				log('下一页');
 				location.href='javascript:$(".data-paginator .next").click();';
 				nextPressed = true;
 			}
@@ -313,16 +309,16 @@ function statistics(){
 		}
 		nextPressed = false;
 		currentPage = $(".data-paginator .current").text();
-		console.log('解析第'+currentPage+'页');
+		log('解析第'+currentPage+'页');
 
 		
-		seeProgress = "http://agent.qbao.com/user/task/seeProgress?userFxId=" + fxId + '&isSettled=' + isSettled + '&taskType='+taskType+'&siteMenus=11'
+		seeProgress = "http:
 		
 		joinedBt = $($(data).find(".joined-bt div")[0]).text();
 		收益 = /(\S+)\s*元+/.exec(joinedBt)[1].trim();
 		收益 = 收益.replace(/[^\d\.]/g, '');
-		// 收益 = parseFloat(收益.replace(/[^\d\.]/g, '')).toFixed(2);
-		// 收益 = 收益.toFixed(2);
+		
+		
 		
 		joinedBt2 = $($(data).find(".joined-bt div")[1]).text();
 		宝券 = /(\S+)\s*宝券+/.exec(joinedBt2)[1].trim();
@@ -331,7 +327,7 @@ function statistics(){
 		
 		joinedProgress1 = $($(data).find(".joined-progress > div")[1]).text();
 		joinedProgress2 = $($(data).find(".joined-progress > div")[2]).text();
-		// joinedProgress = joinedProgress1 + "/" +  joinedProgress2;
+		
 		
 		
 		progressPie = $($(data).find(".progress-pie span")[1]).text();
@@ -348,7 +344,7 @@ function statistics(){
 		var 结算日期,结算日期STR;
 		
 		var joinedStatus =$(data).find(".joined-status").text().trim();
-		console.log(joinedStatus);
+		log(joinedStatus);
 		match = /\d+\D*\d+\D*\d+/.exec(joinedStatus);
 		if(match != null){
 			结算日期 = new Date(new Date(joinedStatus).getTime() + 1 * 86400000 );
@@ -367,7 +363,7 @@ function statistics(){
 		item.收益 = 收益;
 		item.宝券 = 宝券;
 		item.保证金 = 保证金;
-		// item.value = pp;
+		
 		item.分销任务地址=分销任务地址;
 		item.分销任务名称 = joinedName;
 		item.joinedAllState = joinedAllState;
@@ -386,7 +382,7 @@ function statistics(){
 		宝券,
 		保证金,
 		progressPie + "[" + joinedProgress+"]",
-		// joinedProgress,
+		
 		结算日期STR,
 		"<a target='_blank' href='"+seeProgress+"'+><span class='title'>" + joinedName + "</span></a>"
 		]
@@ -403,7 +399,7 @@ function statistics(){
 
 		key = getDate(data.结算日期);
 		if(日结小计[key] == null){
-			// 日结小计[key] = parseFloat(data.收益).toFixed(2);
+			
 			var 日结Item = {};
 			日结Item.收益 = parseFloat(data.收益).toFixed(2);
 			日结Item.宝券 = parseFloat(data.宝券).toFixed(2);
@@ -412,7 +408,7 @@ function statistics(){
 		}
 		else
 		{
-			// 日结小计[key] = (parseFloat(日结小计[key]) + parseFloat(data.收益)).toFixed(2);
+			
 			
 			var 日结Item = 日结小计[key];
 			日结Item.收益 = (parseFloat(日结Item.收益) + parseFloat(data.收益)).toFixed(2);
@@ -423,7 +419,7 @@ function statistics(){
 		
 		月结 = getMonth(data.结算日期);
 		if(月结小计[月结] == null){
-			// 月结小计[月结] = parseFloat(data.收益).toFixed(2);
+			
 			
 			var 月结Item = {};
 			月结Item.收益 = parseFloat(data.收益).toFixed(2);
@@ -433,7 +429,7 @@ function statistics(){
 		}
 		else
 		{
-			// 月结小计[月结] = (parseFloat(月结小计[月结]) + parseFloat(data.收益)).toFixed(2);
+			
 			var 月结Item =月结小计[月结];
 			月结Item.收益 = (parseFloat(月结Item.收益) + parseFloat(data.收益)).toFixed(2);
 			月结Item.宝券 = (parseFloat(月结Item.宝券) + parseFloat(data.宝券)).toFixed(2);
@@ -456,8 +452,8 @@ function statistics(){
 		else
 		{
 			var 领取Item = 领取小计[领取];
-			// 领取Item.分销任务名称 = data.分销任务名称;
-			// 领取Item.分销任务地址 = data.分销任务地址;
+			
+			
 			领取Item.领取个数 += 1;
 			领取小计[领取] = 领取Item;
 		}
@@ -469,14 +465,14 @@ function statistics(){
 	$.each(日结小计, function( k, v ) {
 		等待时间 = DateDiff.inHours(new Date(),new Date(k));
 		日结表.row.add([
-			// "<span class='hide'>"+(++index)+"</span>",
+			
 			null,
 			k,
 			"<span class='hide'>"+(等待时间 < 24? 等待时间 +"小时" : DateDiff.inDays(new Date(),new Date(k))+"天")+"</span>",
 			toThousands(v.收益),
 			toThousands(v.宝券),
 			toThousands(v.保证金),
-			"<span class='hide'>"+toThousands(parseFloat(v.保证金)+parseFloat(v.收益))+"</span>"//计算结算后
+			"<span class='hide'>"+toThousands(parseFloat(v.保证金)+parseFloat(v.收益))+"</span>"
 			]
 		).draw();
 	});
@@ -495,15 +491,15 @@ function statistics(){
 	
 	领取表.clear().draw();
 	$.each(领取小计, function( k, v ) {
-	  // a = $('<a>').attr('href', v.分销任务地址).text(v.分销任务名称);
+	  
 	  var a = '<a target="_blank" href="' +v.分销任务地址+'"><span class="title">' + v.分销任务名称 + '</span></a>';
 	  领取表.row.add([
 			a ,
 			
 			toThousands(v.保证金),
 			v.领取个数,
-			toThousands(v.保证金*v.领取个数)//,
-			// toThousands(v.宝券*v.领取个数),
+			toThousands(v.保证金*v.领取个数)
+			
 			]
 		).draw();
 	});
@@ -559,9 +555,9 @@ function 做表头(){
 	th.append('进度');
 	tr.append(th);
 	
-	// th = $('<th align="left"></th>');
-	// th.append('完成天数');
-	// tr.append(th);
+	
+	
+	
 	
 	th = $('<th align="left"></th>');
 	th.append('结算日期');
@@ -593,7 +589,7 @@ function 做表头(){
 	$("#qbaoUtils").append(t1);
 	进度表 = $('#t1').DataTable({
 		paging: false,
-		// "lengthMenu": [[50, -1], [50, "All"]],
+		
 		"columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -608,26 +604,26 @@ function 做表头(){
 		
 		
 		"footerCallback": function ( row, data, start, end, display ) {
-			//alert('footerCallback');
+			
             var api = this.api(), data;
  
-            // Remove the formatting to get integer data for summation
+            
             var intVal = function ( i ) {
-				// console.log(typeof i + ":" + i);
+				
                 return typeof i === 'string' ?
                     i.replace(/[\$,]/g, '')*1 :
                     typeof i === 'number' ?
                         i : 0;
             };
  
-            // Total over all pages
+            
             total2 = api
                 .column( 2 )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-			// total2 = parseFloat(total1).toFixed(2);
+			
             total3 = api
                 .column( 3 )
                 .data()
@@ -643,8 +639,8 @@ function 做表头(){
                 }, 0 );
 
  
-            // Update footer
-			// console.log(api.column( 2 ).footer());
+            
+			
             $( api.column( 2 ).footer() ).html(toThousands(total2));
             $( api.column( 3 ).footer() ).html(toThousands(total3));
             $( api.column( 4 ).footer() ).html(toThousands(total4));
@@ -690,9 +686,9 @@ function 分销统计表(){
 	th.append('总额');
 	tr.append(th);
 	
-	// th = $('<th align="left"></th>');
-	// th.append('宝券(元)');
-	// tr.append(th);
+	
+	
+	
 	
 	thead.append(tr);
 	$(t4).append(thead);
@@ -713,12 +709,12 @@ function 分销统计表(){
 	
 	
 	
-	// $(".container").append(t4);
+	
 	$("#right").append(t4);
 
 	领取表 = $('#t4').DataTable({
 		paging: false,
-		// "lengthMenu": [[50, -1], [50, "All"]],
+		
 		"columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -733,19 +729,19 @@ function 分销统计表(){
 		
 		
 		"footerCallback": function ( row, data, start, end, display ) {
-			//alert('footerCallback');
+			
             var api = this.api(), data;
  
-            // Remove the formatting to get integer data for summation
+            
             var intVal = function ( i ) {
-				// console.log(typeof i + ":" + i);
+				
                 return typeof i === 'string' ?
                     i.replace(/[\$,]/g, '')*1 :
                     typeof i === 'number' ?
                         i : 0;
             };
  
-            // Total over all pages
+            
             total1 = api
                 .column( 2 )
                 .data()
@@ -759,25 +755,25 @@ function 分销统计表(){
                     return intVal(a) + intVal(b);
                 }, 0 );
  
-            // total4 = api
-                // .column( 4 )
-                // .data()
-                // .reduce( function (a, b) {
-                    // return intVal(a) + intVal(b);
-                // }, 0 );
+            
+                
+                
+                
+                    
+                
  
-            // Update footer
-			// console.log(api.column( 2 ).footer());
+            
+			
             $( api.column( 2 ).footer() ).html(total1);
             $( api.column( 3 ).footer() ).html(toThousands(total3));
-            // $( api.column( 4 ).footer() ).html(toThousands(total4));
+            
         }		
 	});
 }
 
 
 function 构造日结表(){
-	//日结表
+	
 	t2 = $('<table id="t2" class="hover stripe cell-border dt-head-left dt-body-left myTable" align="left" cellspacing="0"></table>');
 	
 		
@@ -832,18 +828,18 @@ function 构造日结表(){
 	
 	tfoot.append(tr);
 	$(t2).append(tfoot);
-	// $("<div class='floatLeft'></div>").append(t2);
+	
 	
 	
 	
 	$("#left").append(t2);
-	// $(".container").append(t2);
-	// $(".container").append($("<div class='floatLeft'></div>").append(t2));
+	
+	
 	
 
 	日结表 = $('#t2').DataTable({
 		paging: false,
-		// "lengthMenu": [[50, -1], [50, "All"]],
+		
 		"columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -853,19 +849,19 @@ function 构造日结表(){
 		
 		
 		"footerCallback": function ( row, data, start, end, display ) {
-			//alert('footerCallback');
+			
             var api = this.api(), data;
  
-            // Remove the formatting to get integer data for summation
+            
             var intVal = function ( i ) {
-				// console.log(typeof i + ":" + i);
+				
                 return typeof i === 'string' ?
                     i.replace(/[\$,]/g, '')*1 :
                     typeof i === 'number' ?
                         i : 0;
             };
  
-            // Total over all pages
+            
             total3 = api
                 .column( 3 )
                 .data()
@@ -886,8 +882,8 @@ function 构造日结表(){
                 }, 0 );
 
  
-            // Update footer
-			// console.log(api.column( 2 ).footer());
+            
+			
             $( api.column( 3 ).footer() ).html(toThousands(total3));
             $( api.column( 4 ).footer() ).html(toThousands(total4));
             $( api.column( 5 ).footer() ).html(toThousands(total5));
@@ -905,7 +901,7 @@ function 构造日结表(){
 }
 
 function 构造月结表(){
-	//月结表
+	
 	t3 = $('<table id="t3" class="hover stripe cell-border myTable" align="left" cellspacing="0"></table>');
 	
 	caption = $('<caption style="display:none" align="left"></caption>');
@@ -947,14 +943,14 @@ function 构造月结表(){
 	tfoot.append(tr);
 	$(t3).append(tfoot);
 	
-	// $(".container").append(t3);
+	
 	$("#right").append(t3);
 	
-	// console.log(t3);
+	
 
 	月结表 = $('#t3').DataTable({
 		paging: false,
-		// "lengthMenu": [[50, -1], [50, "All"]],
+		
 		"columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -964,28 +960,28 @@ function 构造月结表(){
 		
 		
 		"footerCallback": function ( row, data, start, end, display ) {
-			//alert('footerCallback');
+			
             var api = this.api(), data;
  
-            // Remove the formatting to get integer data for summation
+            
             var intVal = function ( i ) {
-				// console.log(typeof i + ":" + i);
+				
                 return typeof i === 'string' ?
                     i.replace(/[\$,]/g, '')*1 :
                     typeof i === 'number' ?
                         i : 0;
             };
  
-            // Total over all pages
+            
             total1 = api
                 .column( 1 )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-			// total1 = parseFloat(total1).toFixed(2);
+			
 				
-            // Total over all pages
+            
             total2 = api
                 .column( 2 )
                 .data()
@@ -1000,7 +996,7 @@ function 构造月结表(){
                 }, 0 );
  
  
-            // Update footer
+            
             $( api.column( 1 ).footer() ).html(toThousands(total1));
             $( api.column( 2 ).footer() ).html(toThousands(total2));
             $( api.column( 3 ).footer() ).html(toThousands(total3));
@@ -1021,7 +1017,7 @@ function getSelectHtml(){
 
 	var docFragment = rangeObj.cloneContents();
 
-	// 　　然后将docFragment渲染出来，获取其innerHTML即可。
+	
 
 	var testDiv = document.createElement("div");
 
@@ -1033,18 +1029,18 @@ function getSelectHtml(){
 	
 }
 
-// $("button").click(function() {
-    // $("#editable").selectText();
-// });
+
+    
+
 
 
 function GetSelectedText () {
-	if (window.getSelection) {  // all browsers, except IE before version 9
+	if (window.getSelection) {  
 		var range = window.getSelection ();                                        
 		alert (range.toString ());
 	} 
 	else {
-		if (document.selection.createRange) { // Internet Explorer
+		if (document.selection.createRange) { 
 			var range = document.selection.createRange ();
 			alert (range.text);
 		}
@@ -1053,37 +1049,37 @@ function GetSelectedText () {
 
 
 function notifyMe(info) {
-  // Let's check if the browser supports notifications
+  
   if (!("Notification" in window)) {
     alert("This browser does not support desktop notification");
   }
 
-  // Let's check if the user is okay to get some notification
+  
   else if (Notification.permission === "granted") {
-    // If it's okay let's create a notification
-    // var notification = new Notification("Hi there!");
+    
+    
     var notification = new Notification(info);
   }
 
-  // Otherwise, we need to ask the user for permission
-  // Note, Chrome does not implement the permission static property
-  // So we have to check for NOT 'denied' instead of 'default'
+  
+  
+  
   else if (Notification.permission !== 'denied') {
     Notification.requestPermission(function (permission) {
 
-      // Whatever the user answers, we make sure we store the information
+      
       if(!('permission' in Notification)) {
         Notification.permission = permission;
       }
 
-      // If the user is okay, let's create a notification
+      
       if (permission === "granted") {
-        // var notification = new Notification("Hi there!");
+        
         var notification = new Notification(info);
       }
     });
   }
 
-  // At last, if the user already denied any notification, and you 
-  // want to be respectful there is no need to bother him any more.
+  
+  
 }

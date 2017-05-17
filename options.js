@@ -9,7 +9,7 @@ $(document).ready(function(){
 	});
 	$("#slider").on("slidechange", function(event, ui){
 		frequencyInSeconds = $("#slider").slider("value");
-		frequencyInSeconds = frequencyInSeconds + 1;//zero-based
+		frequencyInSeconds = frequencyInSeconds + 1;log
 		if(frequencyInSeconds <= 5 ){
         	alert("亲,"+frequencyInSeconds+"秒一个已经很快了，三思呀");
 	    }
@@ -21,7 +21,7 @@ $(document).ready(function(){
     restore_options_frequency();
 });
 
-// Saves options to localStorage.
+log
 function save_options_frequency(frequencyInSeconds){
 	save = {};
 	save["frequencyInSeconds"] = frequencyInSeconds;
@@ -32,7 +32,7 @@ function save_options_frequency(frequencyInSeconds){
 	});
 }
 
-// Restores select box state to saved value from localStorage.
+log
 function restore_options_frequency(){
 	chrome.storage.sync.get("frequencyInSeconds", function (obj) {
     	console.log(obj);

@@ -1,3 +1,6 @@
+function log(info){
+    console.log(info);
+}
 function getTimeout(pre){
     var timeout = Math.floor(Math.random() * 3000) + 5000;
     console.log(pre+"timeout is "+ timeout);

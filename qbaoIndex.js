@@ -1,6 +1,6 @@
-// LoginInterval = setInterval(function(){
+log
 	login();
-// },2000);
+log
 
 function login(){
 	if($("a[name=user_login01]").is(":visible") == true){

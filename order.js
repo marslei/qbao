@@ -16,7 +16,7 @@ function 勾选宝券支付选项(){
 	return true;
 }
 
-//$("#pwd").val("****");
-//console.log("密码"+$("#pwd").val());
+log
+log
 
 勾选宝券支付选项();

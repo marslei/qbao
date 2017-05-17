@@ -34,7 +34,7 @@ pageMonitor = setInterval(function(){
 	$("#activeOne").click();
 	$("#recharge").click();
 	
-	// 您当前可用余额为20.56元，宝券余额为88851宝券
+	log
 },
 1000);
 
