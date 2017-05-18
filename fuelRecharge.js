@@ -32,6 +32,6 @@ pageMonitor = setInterval(function(){
 	$("#jlgm").click();
 
 
-	log
+
 },
 300);

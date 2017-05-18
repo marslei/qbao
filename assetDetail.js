@@ -19,26 +19,19 @@ function setupPage() {
 
 
 	var numTJ = $("<div id='numTJ' class='time'></div>");
-	log
+
 	$(qbaoUtils).append(numTJ);
-	log
 
 	var left = $("<div id='left'></div>");
 	left.addClass("floatLeft");
 	$(qbaoUtils).append(left);
-	log
-
 
 	var right = $("<div id='right'></div>");
 	right.addClass("floatRight");
 	$(qbaoUtils).append(right);
-	log
 
 
-	log
-	$(qbaoUtils).insertBefore(".site_frame_foot");log
-
-
+	$(qbaoUtils).insertBefore(".site_frame_foot");
 	$("#p_assetType .access").append(function() {
 	  return $('<a class="goldBtn">开始统计</a>').click(staticHandler);
 	});
@@ -66,7 +59,7 @@ function handler3(){
 			item.Subject = Subject;
 			item.body = body;
 			t[index]=item;
-		log
+
 	});
 
 
@@ -80,8 +73,6 @@ function setupListener() {
 	构造日收益表();
 	构造签到收益表();
 	构造日支出表();
-	log
-
 
 	$("#qbaoUtils").find("tbody").dblclick(function(){
 
@@ -199,8 +190,6 @@ function statistics(){
 		log('解析第'+currentPage+'页');
 
 
-		log
-
 
 		var item = {};
 		item.时间=时间;
@@ -229,7 +218,7 @@ function statistics(){
 
 
 			key = data.时间;
-			log
+
 			if(支出小计[key] == null){
 
 
@@ -251,12 +240,12 @@ function statistics(){
 				支出Item.转入= (parseFloat(支出Item.转入) + parseFloat(data.转入)).toFixed(2);
 				支出小计[key] =支出Item;
 			}
-			log
+
 		}
 
 
 		if(/.*(收益|奖励).*/.exec(data.流水事项) == null){
-			log
+
 			return;
 		}
 
@@ -285,7 +274,7 @@ function statistics(){
 
 
 		if(/.*(签到).*/.exec(data.流水事项) == null){
-			log
+
 			return;
 		}
 
@@ -367,7 +356,7 @@ function addTDClickListener(){
 
 
 function 构造日支出表(){
-	log
+
 	t2 = $('<table id="t2" class="hover stripe cell-border dt-head-left dt-body-left myTable" align="left" cellspacing="0"></table>');
 
 
@@ -412,17 +401,13 @@ function 构造日支出表(){
 
 	tfoot.append(tr);
 	$(t2).append(tfoot);
-	log
-
 
 	$("#left").append(t2);
-	log
-	log
 
 
 	日支出表= $('#t2').DataTable({
 		paging: false,
-		log
+
 		"columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -432,13 +417,13 @@ function 构造日支出表(){
 
 
 		"footerCallback": function ( row, data, start, end, display ) {
-			log
+
             var api = this.api(), data;
 
 
-            log
+
             var intVal = function ( i ) {
-				log
+
                 return typeof i === 'string' ?
                     i.replace(/[\$,]/g, '')*1 :
                     typeof i === 'number' ?
@@ -446,7 +431,7 @@ function 构造日支出表(){
             };
 
 
-            log
+
             total2 = api
                 .column( 2 )
                 .data()
@@ -467,7 +452,7 @@ function 构造日支出表(){
 
 }
 function 构造日收益表(){
-	log
+
 	t3= $('<table id="t3" class="hover stripe cell-border dt-head-left dt-body-left myTable" align="left" cellspacing="0"></table>');
 
 
@@ -522,17 +507,13 @@ function 构造日收益表(){
 
 	tfoot.append(tr);
 	$(t3).append(tfoot);
-	log
-
 
 	$("#left").append(t3);
-	log
-	log
 
 
 	日收益表= $('#t3').DataTable({
 		paging: false,
-		log
+
 		"columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -542,13 +523,13 @@ function 构造日收益表(){
 
 
 		"footerCallback": function ( row, data, start, end, display ) {
-			log
+
             var api = this.api(), data;
 
 
-            log
+
             var intVal = function ( i ) {
-				log
+
                 return typeof i === 'string' ?
                     i.replace(/[\$,]/g, '')*1 :
                     typeof i === 'number' ?
@@ -556,7 +537,7 @@ function 构造日收益表(){
             };
 
 
-            log
+
             total2 = api
                 .column( 2 )
                 .data()
@@ -569,8 +550,8 @@ function 构造日收益表(){
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            log
-			log
+
+
             $( api.column( 2 ).footer() ).html(toThousands(total2));
             $( api.column( 4 ).footer() ).html(toThousands(total4));
             $( api.column( 1 ).footer() ).html(total2 > 0 ? "日均"+toThousands(total2/data.length) : "");
@@ -588,7 +569,7 @@ function 构造日收益表(){
 }
 
 function 构造签到收益表(){
-	log
+
 	t3= $('<table id="t4" class="hover stripe cell-border dt-head-left dt-body-left myTable" align="left" cellspacing="0"></table>');
 
 
@@ -633,17 +614,13 @@ function 构造签到收益表(){
 
 	tfoot.append(tr);
 	$(t3).append(tfoot);
-	log
-
 
 	$("#right").append(t3);
-	log
-	log
 
 
 	签到收益表= $('#t4').DataTable({
 		paging: false,
-		log
+
 		"columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -653,13 +630,13 @@ function 构造签到收益表(){
 
 
 		"footerCallback": function ( row, data, start, end, display ) {
-			log
+
             var api = this.api(), data;
 
 
-            log
+
             var intVal = function ( i ) {
-				log
+
                 return typeof i === 'string' ?
                     i.replace(/[\$,]/g, '')*1 :
                     typeof i === 'number' ?
@@ -667,15 +644,15 @@ function 构造签到收益表(){
             };
 
 
-            log
+
             total2 = api
                 .column( 2 )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            log
-			log
+
+
             $( api.column( 1 ).footer() ).html(total2>0 ? "日均"+toThousands(total2/data.length) : "");
             $( api.column( 2 ).footer() ).html(toThousands(total2));
         }		

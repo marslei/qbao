@@ -8,10 +8,10 @@ function init() {
 		$(this).find("tbody").selectText();
 
 
-		log
+
 		document.execCommand('copy');
 		sendMail('分销收益统计['+getNowFormatDate()+']',$(this).outerHTML(), null);
-		log
+
 	});
 }
 
@@ -27,17 +27,16 @@ function setupPage() {
 
 var t ;
 var pageInterval ;
-log
+
 function setupListener() {
 	做表头();
 	pageInterval = setInterval(function(){
 		currentPage = $(".md_page_area_folio_current").text();
-		log
-			log
-		log
+
+
+
 		test();
 		log(currentPage);
-		log
 
 	},500);
 
@@ -50,7 +49,7 @@ function setupListener() {
 
 }
 
-log
+
 function 万元每天收益排序(a, b){
   var aName = parseFloat(a.万元每天收益);
   var bName = parseFloat(b.万元每天收益); 
@@ -67,7 +66,7 @@ function test() {
 	currentIndex = 0;
 	if (rows != null && rows.length) {
 		$(rows).each(function() {
-			log
+
 			url = $(this).find('a').attr('href');
 			任务数 = /共(.+)\s*条/.exec($(".md_page_info").text())[1];
 
@@ -97,8 +96,6 @@ function test() {
 			任务天数 = $($(this).find(".hall_list_data_info .hall_list_data_label")[3]).find('.hall_list_data_info_attr span').text().trim().replace(/[^\d\.]/g,'');
 
 			万元每天收益 = 收益 > 0 ? (((收益 / 保证金) / 任务天数) * 10000).toFixed(2) : 0;
-			log
-
 
 			任务 = {};
 			任务.任务名称 = 任务名称;
@@ -114,7 +111,7 @@ function test() {
 
 			array[index] = 任务;
 			index++;
-			log
+
 			obj[url]=任务;
 
 
@@ -132,9 +129,9 @@ function test() {
 			).draw();
 		});
 	}
-	log
-		log
-	log
+
+
+
 	addTDClickListener();
 	if(currentIndex >= $(rows).length){
 		log("下一页");
@@ -155,7 +152,7 @@ function toPercent(data){
 }
 
 function format(num) {
-	log
+
     return (parseFloat(num).toFixed(2) + '').replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');
 }
 
@@ -211,13 +208,13 @@ function 做表头(){
 	thead.append(tr);
 
 
-	log
+
 	$(statisticsTable).append(thead);
-	log
+
 	$('#adWraper').append(statisticsTable);
 	t = $('#marsTable').DataTable({
 		paging: false,
-		log
+
 		"columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -242,38 +239,38 @@ function speak(content) {
 
 
 function notifyMe(info) {
-  log
+
   if (!("Notification" in window)) {
     alert("This browser does not support desktop notification");
   }
 
-  log
+
   else if (Notification.permission === "granted") {
-    log
-    log
+
+
     var notification = new Notification(info);
   }
 
-  log
-  log
-  log
+
+
+
   else if (Notification.permission !== 'denied') {
     Notification.requestPermission(function (permission) {
 
-      log
+
       if(!('permission' in Notification)) {
         Notification.permission = permission;
       }
 
-      log
+
       if (permission === "granted") {
-        log
+
         var notification = new Notification(info);
       }
     });
   }
 
-  log
-  log
+
+
 }
 

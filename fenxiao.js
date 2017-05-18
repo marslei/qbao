@@ -339,7 +339,7 @@ function statistics(){
 		log('解析第'+currentPage+'页');
 
 
-		seeProgress = "http:
+		seeProgress = "http://agent.qbao.com/user/task/seeProgress?userFxId=" + fxId + '&isSettled=' + isSettled + '&taskType='+taskType+'&siteMenus=11'
 
 
 		joinedBt = $($(data).find(".joined-bt div")[0]).text();

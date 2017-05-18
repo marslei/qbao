@@ -15,23 +15,18 @@ function startPageMonitor(){
 }
 function checkProgress(){
 	console.log("checkProgress "+getNowFormatDate());
-	log
-	if(taskType == 0){
+    if(taskType == 0){
 		progressNum = $(".progress-num").text();
-		log
 		if(/3\/3/.test(progressNum)){
 			console.log("checkProgress,关闭当前页面");
-			log
 			closeThisWindow(10*1000);
 			return true;
 		}
 	}
-	log
 	else if(taskType == 1){
 		studyBtn = $(".study-btn").text();
 		if(/已完成.*/.test(studyBtn)){
 			console.log("checkProgress,关闭当前页面");
-			log
 			closeThisWindow(10*1000);
 			return true;
 		}
@@ -214,7 +209,6 @@ function startWork(){
 			console.log("今日已完成，关闭任务");
 			window.clearInterval(currentInterval);
 		}else{
-			log
 			console.log("今日未完成，启动任务");
 			start2();
 		}
@@ -282,7 +276,6 @@ function startWork(){
 		if($(".problem-failed").is(":visible") == false){
 			return;
 		}
-		log
 		location.reload()
 	},1000);	
 }
@@ -324,8 +317,7 @@ function startADTaskWork(){
 			$('.slider-wrap').hide();
 			$('.timer').show();
 			$('.timer .progress-bar').css({'width':'100%'});
-			log
-			$('.timer .step-btn').attr('step-state','end').html('完成').addClass('active');			
+			$('.timer .step-btn').attr('step-state','end').html('完成').addClass('active');
 		},2000);
 	},1000);
 
@@ -333,7 +325,6 @@ function startADTaskWork(){
 		if($(".problem-failed").is(":visible") == false){
 			return;
 		}
-		log
 		location.reload()
 	},1000);	
 }

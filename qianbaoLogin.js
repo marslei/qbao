@@ -11,7 +11,7 @@ refreshInterval = setInterval(function(){
 	window.location.reload();
 },300000);
 
-log
+
 function login(){
 	src = $(".code_imageImg").attr("src");
 	if(src == null){
@@ -23,12 +23,11 @@ function login(){
 
 
 	Subject = '请求自动登录['+getNowFormatDate()+']';
-	log
+
 	body = $("<img/>", {"src":code_imageImg});
-	log
 
 	log(body.outerHTML());
-	log
+
 	sendMail(Subject, $(".code_image").outerHTML(), null);
-	log
+
 }

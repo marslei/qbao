@@ -1,6 +1,5 @@
-log
+
 	login();
-log
 
 function login(){
 	if($("a[name=user_login01]").is(":visible") == true){

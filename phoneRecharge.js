@@ -37,7 +37,7 @@ pageMonitor = setInterval(function(){
 	$("#recharge").click();
 
 
-	log
+
 },
 1000);
 
