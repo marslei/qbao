@@ -122,7 +122,7 @@ function startWork(){
 	}
 	pageInterval = setInterval(function(){
 		statistics();
-	},500);	
+	},1000);
 }
 
 function addTDClickListener(){
