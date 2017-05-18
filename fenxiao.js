@@ -124,6 +124,8 @@ function startWork(){
 		statistics();
 	},1000);
 }
+function nextPage(){
+}
 
 function addTDClickListener(){
 	$("#qbaoUtils th, #qbaoUtils td").on("click", function(){
@@ -296,10 +298,43 @@ var nextPressed = false;
 function statistics(){
 
 	$(".box-content").each(function(index,data){
-		joinedName = $(data).find(".joined-name").text();
-		分销任务地址 = $(data).find('.joined-name a').attr('href');
-
 		fxId = $(data).find("a[data-id]").attr('data-id');
+
+        if(obj.hasOwnProperty(fxId)){
+            log("已抓取 " + fxId + "" + obj.hasOwnProperty(fxId));
+
+            if(Object.keys(obj).length == 任务数 && pageInterval !=null){
+                log('统计完毕');
+                speak('统计完成，一共'+任务数+'个分销任务');
+                notifyMe('统计完成，一共'+任务数+'个分销任务');
+
+
+                window.clearInterval(pageInterval);
+                pageInterval = null;
+
+                绘制统计();
+
+
+                log('启动逐一打开检测');
+                handler();
+
+
+                return;
+            }
+
+
+            if(nextPressed == false){
+                log('下一页');
+                location.href='javascript:$(".data-paginator .next").click();';
+                nextPressed = true;
+            }
+            return;
+        }
+
+        joinedName = $(data).find(".joined-name").text();
+        分销任务地址 = $(data).find('.joined-name a').attr('href');
+
+
 		taskType = $(data).find("a[data-id]").attr('task-type');
 		保证金 =$(data).parent().find(".fr").text();
 		保证金 = 保证金.replace(/[^\d\.]/g, '');
@@ -308,32 +343,6 @@ function statistics(){
 		任务数 = /共(.+)\s*条/.exec($(".data-status").text())[1];
 
 
-		if(obj.hasOwnProperty(fxId)){
-			if(Object.keys(obj).length == 任务数 && pageInterval !=null){
-				log('统计完毕');
-				speak('统计完成，一共'+任务数+'个分销任务');
-				notifyMe('统计完成，一共'+任务数+'个分销任务');
-
-
-				window.clearInterval(pageInterval);
-				pageInterval = null;
-
-
-				log('启动逐一打开检测');
-				handler();
-
-
-				return;
-			}
-
-
-			if(nextPressed == false){
-				log('下一页');
-				location.href='javascript:$(".data-paginator .next").click();';
-				nextPressed = true;
-			}
-			return;
-		}
 		nextPressed = false;
 		currentPage = $(".data-paginator .current").text();
 		log('解析第'+currentPage+'页');
@@ -389,6 +398,7 @@ function statistics(){
 		var item = {};
 		item.p = progressPie;
 		item.结算日期 = 结算日期;
+		item.结算日期STR = 结算日期STR;
 		item.收益 = 收益;
 		item.宝券 = 宝券;
 		item.保证金 = 保证金;
@@ -399,26 +409,24 @@ function statistics(){
 		item.joinedAllState = joinedAllState;
 		item.fxId = fxId;
 		item.seeProgress = seeProgress;
+		item.joinedProgress = joinedProgress;
 
 
 		obj[fxId]=item;
 		array[Object.keys(obj).length-1] = item;
 
 
-		进度表.row.add([
-		null,
-		fxId,
-		收益,
-		宝券,
-		保证金,
-		progressPie + "[" + joinedProgress+"]",
 
-
-		结算日期STR,
-		"<a target='_blank' href='"+seeProgress+"'+><span class='title'>" + joinedName + "</span></a>"
-		]
-		).draw();
 	});
+
+	var v = /共(.+)\s*条/.exec($(".data-status").text());
+	if(v != null && v.length > 0){
+		任务数 = v[1];
+		$("#numTJ").text("[当前"+array.length+"条/合计"+任务数+"条]");	
+	}
+}
+
+function 绘制统计(){
 
 
 	var 日结小计 = {};
@@ -427,6 +435,19 @@ function statistics(){
 
 
 	$.each(array, function(index,data){
+        进度表.row.add([
+        null,
+        data.fxId,
+        data.收益,
+        data.宝券,
+        data.保证金,
+        data.p + "[" + data.joinedProgress+"]",
+
+
+        data.结算日期STR,
+        "<a target='_blank' href='"+data.seeProgress+"'+><span class='title'>" + data.分销任务名称 + "</span></a>"
+        ]
+        ).draw();
 
 		key = getDate(data.结算日期);
 		if(日结小计[key] == null){
@@ -545,11 +566,6 @@ function statistics(){
 		).draw();
 	});
 	addTDClickListener();
-	var v = /共(.+)\s*条/.exec($(".data-status").text());
-	if(v != null && v.length > 0){
-		任务数 = v[1];
-		$("#numTJ").text("[当前"+array.length+"条/合计"+任务数+"条]");	
-	}
 }
 
 function getDate(结算日期){
