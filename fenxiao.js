@@ -411,14 +411,7 @@ function 绘制统计(){
     printTable(领取表,print);
 	addTDClickListener();
 }
-function printTable(table,data){
-    table.rows
-    .add(print)
-    .draw()
-    .nodes()
-    .to$()
-    .addClass( 'new' );
-}
+
 function getDate(结算日期){
 	return 结算日期.getFullYear()+"-" + (结算日期.getMonth() + 1) + "-" + 结算日期.getDate();
 }

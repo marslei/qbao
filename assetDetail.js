@@ -220,37 +220,49 @@ function 绘制统计(){
 		}
 	});
 	日支出表.clear().draw();
+    i = 0;
+    print = [];
 	$.each(支出小计, function( k, v ) {
-		日支出表.row.add([
+		print[i] = [
 				null,
 				v.时间,
 				toThousands(v.转出)
-				]
-			).draw();
+				];
+        i++;
 	});
+	printTable(日支出表, print);
+
 	日收益表.clear().draw();
+    i = 0;
+    print = [];
 	$.each(日收益小计, function( k, v ) {
 		发放日期 = new Date();
 		发放日期.setTime(new Date(v.时间).getTime() + 2 * 86400000 );
 		发放日期STR = 发放日期.getFullYear()+"-" + (发放日期.getMonth() + 1) + "-" + 发放日期.getDate();
-		日收益表.row.add([
+		print[i]=[
 				null,
 				v.时间,
 				toThousands(v.转入),
 				发放日期STR,
 				toThousands(v.转入 * 0.06)
-				]
-			).draw();
+				];
+		i ++;
 	});
+    printTable(日收益表, print);
+
 	签到收益表.clear().draw();
+    i = 0;
+    print = [];
 	$.each(日签到小计, function( k, v ) {
-		签到收益表.row.add([
+		print[i]=[
 				null,
 				v.时间,
 				toThousands(v.转入)
-				]
-			).draw();
+				];
+		i++;
 	});
+    printTable(签到收益表, print);
+
 	addTDClickListener();
 }
 function addTDClickListener(){
