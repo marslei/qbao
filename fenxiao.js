@@ -1,5 +1,4 @@
-﻿
-var PAGE_RELOAD_INTEVERAL = 300;
+﻿var PAGE_RELOAD_INTEVERAL = 300;
 var countDown = PAGE_RELOAD_INTEVERAL;
 
 refreshInterval = setInterval(function(){
@@ -22,10 +21,7 @@ refreshInterval = setInterval(function(){
 var isSettled = 0;
 var divider = "	"
 
-var 进度表;
-var 领取表;
-var 日结表;
-var 月结表;
+var 进度表,领取表,日结表,月结表;
 var prePage;
 
 var Subject,Body, snapshotTarget;
@@ -37,13 +33,9 @@ function init() {
 
 init();
 
-
 function setupPage() {
-
-
 	var qbaoUtils = $("<div id='qbaoUtils'></div>");
 	qbaoUtils.addClass("qbaoUtils");
-
 
 	var numTJ = $("<div id='numTJ' class='time'></div>");
 	var timer = $("<div id='timer' class='time'></div>");
@@ -64,13 +56,13 @@ function setupPage() {
 
 
 	$(".breadcrumb").append(function() {
-	  return $('<a class="goldBtn">逐一打开</a>').click(handler);
+	  return $('<a class="goldBtn">逐一打开</a>').click(openTaskHandler);
 	});
 	$(".breadcrumb").append(function() {
-	  return $('<a class="goldBtn">重置统计</a>').click(handler2);
+	  return $('<a class="goldBtn">重置统计</a>').click(resetTaskHandler);
 	});
 	$(".breadcrumb").append(function() {
-	  return $('<a class="goldBtn">发邮件</a>').click(handler3);
+	  return $('<a class="goldBtn">发邮件</a>').click(sendMailHandler);
 	});
 	$(".breadcrumb").append(function() {
 	  return $('<a class="goldBtn">发送图片</a>').click(sendPicHandler);
@@ -148,7 +140,7 @@ function 结算日期排序(a, b){
   return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
 }
 
-function handler3(){
+function sendMailHandler(){
 	t = [];
 	$("#t2 tbody,#t3 tbody,#t4 tbody,#t1 tbody").each(function(index){
 
@@ -249,7 +241,7 @@ function feideeHandler(){
 	});
 }
 
-function handler2(){
+function resetTaskHandler(){
 	prePage = "";
 	obj = {};
 	array = [];
@@ -262,7 +254,7 @@ function handler2(){
 
 	startWork();
 }
-function handler(){
+function openTaskHandler(){
 
 
 	$.each(array,function(index,data){
@@ -316,7 +308,7 @@ function statistics(){
 
 
                 log('启动逐一打开检测');
-                handler();
+                openTaskHandler();
 
 
                 return;
@@ -427,27 +419,26 @@ function statistics(){
 }
 
 function 绘制统计(){
-
-
 	var 日结小计 = {};
 	var 月结小计 = {};
 	var 领取小计 = {};
 
-
+    print = [];
+    i = 0;
 	$.each(array, function(index,data){
-        进度表.row.add([
-        null,
-        data.fxId,
-        data.收益,
-        data.宝券,
-        data.保证金,
-        data.p + "[" + data.joinedProgress+"]",
+	    print[i]=[
+             null,
+             data.fxId,
+             data.收益,
+             data.宝券,
+             data.保证金,
+             data.p + "[" + data.joinedProgress+"]",
 
 
-        data.结算日期STR,
-        "<a target='_blank' href='"+data.seeProgress+"'+><span class='title'>" + data.分销任务名称 + "</span></a>"
-        ]
-        ).draw();
+             data.结算日期STR,
+             "<a target='_blank' href='"+data.seeProgress+"'+><span class='title'>" + data.分销任务名称 + "</span></a>"
+             ];
+	    i++;
 
 		key = getDate(data.结算日期);
 		if(日结小计[key] == null){
@@ -514,58 +505,67 @@ function 绘制统计(){
 			领取小计[领取] = 领取Item;
 		}
 	});
-
+	printTable(进度表,print);
 
 	日结表.clear().draw();
 	var index = 0;
+	i = 0;
+	print = [];
 	$.each(日结小计, function( k, v ) {
 		等待时间 = DateDiff.inHours(new Date(),new Date(k));
-		日结表.row.add([
-
-
-			null,
-			k,
-			"<span class='hide'>"+(等待时间 < 24? 等待时间 +"小时" : DateDiff.inDays(new Date(),new Date(k))+"天")+"</span>",
-			toThousands(v.收益),
-			toThousands(v.宝券),
-			toThousands(v.保证金),
-			"<span class='hide'>"+toThousands(parseFloat(v.保证金)+parseFloat(v.收益))+"</span>"
-			]
-		).draw();
+	    print[i] = [
+            null,
+            k,
+            "<span class='hide'>"+(等待时间 < 24? 等待时间 +"小时" : DateDiff.inDays(new Date(),new Date(k))+"天")+"</span>",
+            toThousands(v.收益),
+            toThousands(v.宝券),
+            toThousands(v.保证金),
+            "<span class='hide'>"+toThousands(parseFloat(v.保证金)+parseFloat(v.收益))+"</span>"
+            ];
+        i++;
 	});
+    printTable(日结表,print);
 
 	月结表.clear().draw();
+    i = 0;
+    print = [];
 	$.each(月结小计, function( k, v ) {
-
-
-	  月结表.row.add([
+	  print[i] = [
 			k,
 			toThousands(v.收益),
 			toThousands(v.宝券),
 			toThousands(v.保证金)
-			]
-		).draw();
+        ];
+      i++;
 	});
+    printTable(月结表,print);
 
 
 	领取表.clear().draw();
+    i = 0;
+    print = [];
 	$.each(领取小计, function( k, v ) {
-
-
 	  var a = '<a target="_blank" href="' +v.分销任务地址+'"><span class="title">' + v.分销任务名称 + '</span></a>';
-	  领取表.row.add([
+	  print[i]  = [
 			a ,
-
-
 			toThousands(v.保证金),
 			v.领取个数,
 			toThousands(v.保证金*v.领取个数)
-
-
-			]
-		).draw();
+			];
+	  i++;
 	});
+    printTable(领取表,print);
+
 	addTDClickListener();
+}
+
+function printTable(table,data){
+    table.rows
+    .add(print)
+    .draw()
+    .nodes()
+    .to$()
+    .addClass( 'new' );
 }
 
 function getDate(结算日期){

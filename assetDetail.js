@@ -146,6 +146,7 @@ function checkIsFinish(){
 
 		window.clearInterval(pageInterval);
 		pageInterval = null;
+        绘制统计();
 
 
 		return true;
@@ -203,8 +204,12 @@ function statistics(){
 
 
 	});
+	if(流水数!= null){
+		$("#numTJ").text("[当前"+array.length+"条/合计"+流水数+"条]");	
+	}
+}
 
-
+function 绘制统计(){
 	var 支出小计 = {};
 	var 日收益小计 = {};
 	var 日签到小计 = {};
@@ -342,10 +347,7 @@ function statistics(){
 
 
 	addTDClickListener();
-	if(流水数!= null){
-		$("#numTJ").text("[当前"+array.length+"条/合计"+流水数+"条]");	
-	}
-}	
+}
 function addTDClickListener(){
 	$("#qbaoUtils th, #qbaoUtils td").on("click", function(){
 		$(this).selectText();
