@@ -38,7 +38,6 @@ function setupListener() {
 	});
 }
 
-
 function 万元每天收益排序(a, b){
   var aName = parseFloat(a.万元每天收益);
   var bName = parseFloat(b.万元每天收益); 
@@ -58,7 +57,6 @@ function test() {
 
 			url = $(this).find('a').attr('href');
 			任务数 = /共(.+)\s*条/.exec($(".md_page_info").text())[1];
-
 
 			if(obj.hasOwnProperty(url)){
 				if(Object.keys(obj).length == 任务数 && pageInterval != null){
@@ -80,7 +78,6 @@ function test() {
 			任务名称 = $(this).find(".hall_list_data_title").text();
 			收益 = $($(this).find(".hall_list_data_info .hall_list_data_label")[0]).find('.abs_word em').text().trim().replace(/[^\d\.]/g,'');
 
-
 			保证金 = $($(this).find(".hall_list_data_info .hall_list_data_label")[2]).find('.hall_list_data_info_attr span').text().trim().replace(/[^\d\.]/g,'');
 
 			任务天数 = $($(this).find(".hall_list_data_info .hall_list_data_label")[3]).find('.hall_list_data_info_attr span').text().trim().replace(/[^\d\.]/g,'');
@@ -101,8 +98,6 @@ function test() {
 			obj[url]=任务;
 		});
 	}
-
-
 
 	addTDClickListener();
 	if(currentIndex >= $(rows).length){
@@ -164,7 +159,6 @@ function 做表头(){
 	th.append('任务名称');
 	tr.append(th);
 
-
 	th = $('<th align="left"></th>');
 	th.append('收益(元)');
 	tr.append(th);
@@ -173,11 +167,9 @@ function 做表头(){
 	th.append('保证金(元)');
 	tr.append(th);
 
-
 	th = $('<th align="left"></th>');
 	th.append('任务天数');
 	tr.append(th);
-
 
 	th = $('<th align="left"></th>');
 	th.append('万元日收益(元)');
@@ -188,19 +180,15 @@ function 做表头(){
 	tr.append(th);
 	thead.append(tr);
 
-
 	th = $('<th align="left"></th>');
 	th.append('年化收益率');
 	tr.append(th);
 	thead.append(tr);
 
-
 	th = $('<th align="left"></th>');
 	th.append('年化(复利)');
 	tr.append(th);
 	thead.append(tr);
-
-
 
 	$(statisticsTable).append(thead);
 
@@ -216,7 +204,6 @@ function 做表头(){
         "order": [[5, 'desc']]
 	});
 
-
 	t.on( 'order.dt search.dt', function () {
         t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
             cell.innerHTML = i+1;
@@ -224,12 +211,10 @@ function 做表头(){
     } ).draw();
 }
 
-
 function speak(content) {
     var msg = new SpeechSynthesisUtterance(content);
 	window.speechSynthesis.speak(msg);
 }
-
 
 function notifyMe(info) {
 
@@ -237,24 +222,17 @@ function notifyMe(info) {
     alert("This browser does not support desktop notification");
   }
 
-
   else if (Notification.permission === "granted") {
-
 
     var notification = new Notification(info);
   }
 
-
-
-
   else if (Notification.permission !== 'denied') {
     Notification.requestPermission(function (permission) {
-
 
       if(!('permission' in Notification)) {
         Notification.permission = permission;
       }
-
 
       if (permission === "granted") {
 
@@ -262,8 +240,6 @@ function notifyMe(info) {
       }
     });
   }
-
-
 
 }
 
