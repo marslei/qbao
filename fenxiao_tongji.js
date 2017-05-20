@@ -6,15 +6,11 @@ function init() {
 	setupListener();
 	$("#adWraper table").dblclick(function(){
 		$(this).find("tbody").selectText();
-
-
-
 		document.execCommand('copy');
 		sendMail('分销收益统计['+getNowFormatDate()+']',$(this).outerHTML(), null);
 
 	});
 }
-
 
 init();
 
@@ -24,7 +20,6 @@ function setupPage() {
 	$("#floatTips").append($("<a id='print' class='goldBtn'>本地打开</a>"));
 }
 
-
 var t ;
 var pageInterval ;
 
@@ -32,21 +27,15 @@ function setupListener() {
 	做表头();
 	pageInterval = setInterval(function(){
 		currentPage = $(".md_page_area_folio_current").text();
-
-
-
 		test();
 		log(currentPage);
 
 	},500);
 
-
 	$("#print").click(function(){
 		log("打印");
 		print($('#marsTable').parent());
 	});
-
-
 }
 
 
@@ -56,11 +45,11 @@ function 万元每天收益排序(a, b){
   return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
 }
 
-var array = [];
-var index = 0;
+//var array = [];
+//var index = 0;
 var obj = {};
 function test() {
-	array = [];
+	//array = [];
 	rows = $(".hall_list_data li");
 	empty = true;
 	currentIndex = 0;
@@ -78,7 +67,8 @@ function test() {
 					pageInterval = null;
 					speak('统计完成，一共'+任务数+'个任务');
 					notifyMe('统计完成，一共'+任务数+'个任务');
-					window.scrollTo(0,document.body.scrollHeight+Number.MAX_SAFE_INTEGER);
+					绘制统计();
+//					window.scrollTo(0,document.body.scrollHeight+Number.MAX_SAFE_INTEGER);
 
 					return;
 				}
@@ -108,25 +98,7 @@ function test() {
 			任务.年复利 = Math.pow(1.0 + 任务.月_30天_收益率, 12)-1;
 			任务.url = url;
 
-
-			array[index] = 任务;
-			index++;
-
 			obj[url]=任务;
-
-
-			t.row.add([
-				null,
-				"<a target='_blank' href='"+任务.url+"'+>" + 任务.任务名称 + "</a>",
-				format(任务.收益),
-				format(任务.保证金),
-				任务.任务天数,
-				format(任务.万元每天收益),
-				toPercent(任务.月_30天_收益率),
-				toPercent(任务.年化收益率),
-				toPercent(任务.年复利)
-				]
-			).draw();
 		});
 	}
 
@@ -137,6 +109,28 @@ function test() {
 		log("下一页");
 		$(".md_page_area_fore_icon").click();
 	}
+}
+
+function 绘制统计(){
+    data = [];
+    i = 0;
+    $.each(obj, function(index,任务){
+        data[i] = [null,
+            "<a target='_blank' href='"+任务.url+"'+>" + 任务.任务名称 + "</a>",
+            format(任务.收益),
+            format(任务.保证金),
+            任务.任务天数,
+            format(任务.万元每天收益),
+            toPercent(任务.月_30天_收益率),
+            toPercent(任务.年化收益率),
+            toPercent(任务.年复利)];
+        i++;
+    });
+    t.rows.add(data)
+    .draw()
+    .nodes()
+    .to$()
+    .addClass( 'new' );
 }
 function addTDClickListener(){
 	$("#marsTable th, #marsTable td").on("click", function(){
@@ -158,7 +152,6 @@ function format(num) {
 
 function 做表头(){
 	statisticsTable = $('<table id="marsTable" align="left" width="95%" class="hover stripe" cellspacing="0"></table>');
-
 
 	thead = $('<thead></thead>');
 	tfoot = $('<tfoot></tfoot>');
