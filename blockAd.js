@@ -9,7 +9,6 @@ function blockAd(suspectedAd,attr){
 	log("block "+target);
 	suspectedAd.remove();
 }
-
 function isAbsoluteUrl(url){
 	return /^https?:\/\/.+/.test(url);
 }

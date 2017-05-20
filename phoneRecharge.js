@@ -2,8 +2,6 @@
 pageMonitor = setInterval(function(){
 	owerMoney = $(".money-many").text();
 	log(owerMoney);
-
-
 	baoquan = /.+?\s*(\d+)\s*宝券/.exec(owerMoney)[1];
 	if(baoquan > 0){
 		window.clearInterval(pageMonitor);
@@ -13,8 +11,6 @@ pageMonitor = setInterval(function(){
 	{
 		return;
 	}
-
-
 	if(baoquan >= 70000){
 		log("选择充500");
 		$(".m-select dd:contains(500元)").click();
@@ -32,21 +28,14 @@ pageMonitor = setInterval(function(){
 		$(".m-select dd:contains(100元)").click();
 	}
 	$(".m-select dd:contains(100元)").click();
-
 	$("#activeOne").click();
 	$("#recharge").click();
-
-
-
 },
 1000);
-
-
 confirmInterval = setInterval(function(){
 	if($("#confirmBtnPay").is(":visible") == true){
 		$("#confirmBtnPay").click();
 	}
-
 	if($(".error").is(":visible") == true){
 		log("报错了，不提交");
 		window.clearInterval(confirmInterval);

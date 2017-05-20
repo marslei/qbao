@@ -1,7 +1,6 @@
 $(".jl-detail em").click(function(){
 	copyThis($(this));
 });
-
 function copyThis(element){
 	$(element).selectText();
 	log($(element).text());

@@ -1,8 +1,6 @@
 pageMonitor = setInterval(function(){
 	owerMoney = $(".ower-money").text();
 	log(owerMoney);
-
-
 	baoquan = /.+?(\d+)宝券/.exec(owerMoney)[1];
 	if(baoquan > 0){
 		window.clearInterval(pageMonitor);
@@ -12,8 +10,6 @@ pageMonitor = setInterval(function(){
 	{
 		return;
 	}
-
-
 	if(baoquan >= 140000){
 		log("选择充1000");
 		$(".check div:contains(1000元)").click();
@@ -26,12 +22,7 @@ pageMonitor = setInterval(function(){
 		log("选择充100");
 		$(".check div:contains(100元)").click();
 	}
-
-
 	$("#bind").click();
 	$("#jlgm").click();
-
-
-
 },
 300);

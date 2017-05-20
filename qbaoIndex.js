@@ -1,6 +1,5 @@
 
 	login();
-
 function login(){
 	if($("a[name=user_login01]").is(":visible") == true){
 		loc = $("a[name=user_login01]").attr('href');

@@ -1,7 +1,5 @@
 ﻿console.log("taskType="+$.QueryString['taskType']);
 taskType = $.QueryString['taskType'];
-
-
 function startPageMonitor(){
 	console.log("startPageMonitor");
 	pageMonitor = setInterval(function(){
@@ -11,7 +9,6 @@ function startPageMonitor(){
 			window.clearInterval(pageMonitor);
 		}
 	}, 5*1000);
-
 }
 function checkProgress(){
 	console.log("checkProgress "+getNowFormatDate());
@@ -30,8 +27,6 @@ function checkProgress(){
 			closeThisWindow(10*1000);
 			return true;
 		}
-
-
 	}
 	return false;
 }
@@ -48,8 +43,6 @@ function closeThisWindow(timeout){
 	1000)
 }
 startPageMonitor();
-
-
 if(taskType == 0){
 	console.log('分销任务');
 	gzh = setInterval(function(){
@@ -66,8 +59,6 @@ if(taskType == 0){
 }
 else if(taskType == 1){
 	console.log('广告任务');
-
-
 	adTaskInterval = setInterval(function(){
 		statusTxt = $(".status-txt").text();
 		if(statusTxt == null){
@@ -82,14 +73,10 @@ else if(taskType == 1){
 		}
 	},
 	1000);
-
-
 }
 else{
 	console.log('为止类型，暂不处理');
 }
-
-
 function start2(){
 	if($('.checkin-btn').hasClass('disabled') == false){
 		$('.checkin-btn')[0].click();
@@ -104,38 +91,27 @@ function start2(){
 		return;
 	}
 }
-
-
 function startWork(){
-
-
 	currentInterval = setInterval(function(){
 		if($(".step-btn").is(":visible") == false){
 			return;
 		}
-
-
 		var text = $(".step-btn").text();
 		console.log(text);
 		if (/下.*/.test(text)) {
 			$('.timer .step-btn').click();
-
 		} else if (/开始.*/.test(text)) {
 			$('.timer .step-btn').click();
 		}
 		else if (/去答题.*/.test(text)) {
 			$('.timer .step-btn').click();
 			window.clearInterval(currentInterval);
-
-
 			problem = $(".problem-answer .desc").text().trim();
 			console.log(problem);
 			bzj = $(".info .red").text();
 			console.log("保证金"+bzj);
 			bzj =/.*10,000.*/.test(bzj);
 			bzj2 =/.*20,000.*/.test(bzj);
-
-
 			if(/.*商家名称是鑫洋家居馆吗？.*/.test(problem)||
 			   /.*该分销周期是23天吗.*/.test(problem)||
 			   /.*店铺主营家居类商品吗.*/.test(problem)||
@@ -182,27 +158,19 @@ function startWork(){
 			}
 			window.location = "javascript:$('.problem-answer .btn').click()";
 		}
-
-
 		if(/提交答案.*/.test(text)){
 			window.clearInterval(currentInterval);
-
-
-			if($(".val-n").hasClass("checked-radio") || 
+			if($(".val-n").hasClass("checked-radio") ||
 			   $(".val-y").hasClass("checked-radio")){
 				$(".answer-btn").click();
 			}
 		}
 	},1000);
-
-
 	progressNumInterval = setInterval(function(){
 		if($(".progress-num").length = 0){
 			return;
 		}
 		window.clearInterval(progressNumInterval);
-
-
 		progressNum = $(".progress-num").text();
 		console.log(progressNum);
 		if(/3\/3/.test(progressNum)){
@@ -213,26 +181,17 @@ function startWork(){
 			start2();
 		}
 	},1000);
-
-
 	checkinInterval = setInterval(function(){
-
 		if($(".checkin-img-wrapper .checkin-icon").is(":visible") == false){
 			return;
 		}
-
 		window.clearInterval(checkinInterval);
 		window.location = "javascript:+$('.checkin-img-wrapper .checkin-icon').click()";
-
-
 	},1000);
-
 	setInterval(function(){
 		if($(".continue-btn").is(":visible") == false){
 			return;
 		}
-
-
 		continueBtn = $(".continue-btn:visible").text();
 		console.log(continueBtn);
 		if(/继续任务.*/.test(continueBtn)){
@@ -240,30 +199,20 @@ function startWork(){
 		}else{
 			console.log("今日已完成");
 		}
-
-
 	},1000);
-
 	shareInterval = setInterval(function(){
 		if($(".share-to").is(":visible") == false){
 			return;
 		}
 		window.clearInterval(shareInterval);
-
-
 		window.location = "javascript:var qq = $('.qq'); qq.removeClass('qq'); qq.click();";
-
-
-	},1000);	
-
+	},1000);
 	sliderInterval = setInterval(function(){
 		if($(".slider-wrap").is(":visible") == false){
 			return;
 		}
 		window.clearInterval(sliderInterval);
 		console.log('绕过滑块');
-
-
 		setTimeout(function(){
 			$('.slider-wrap').hide();
 			$('.timer').show();
@@ -271,7 +220,6 @@ function startWork(){
 			$('.timer .step-btn').attr('step-state','end').html('去答题').addClass('active');			
 		},2000);
 	},1000);
-
 	failInterval = setInterval(function(){
 		if($(".problem-failed").is(":visible") == false){
 			return;
@@ -279,40 +227,28 @@ function startWork(){
 		location.reload()
 	},1000);	
 }
-
-
 function startADTaskWork(){
 	window.location = "javascript:$('.study-btn').click();";
-
-
 	currentInterval = setInterval(function(){
 		if($(".step-btn").is(":visible") == false){
 			return;
 		}
-
-
 		var text = $(".step-btn").text();
 		console.log(text);
 		if (/下.*/.test(text)) {
 			$('.timer .step-btn').click();
-
 		} else if (/开始.*/.test(text)) {
 			$('.timer .step-btn').click();
 		} else if (/完成.*/.test(text)) {
 			$('.timer .step-btn').click();
 		}
-
-
 	},1000);
-
 	sliderInterval2 = setInterval(function(){
 		if($(".slider-wrap").is(":visible") == false){
 			return;
 		}
 		window.clearInterval(sliderInterval2);
 		console.log('绕过滑块');
-
-
 		setTimeout(function(){
 			$('.slider-wrap').hide();
 			$('.timer').show();
@@ -320,7 +256,6 @@ function startADTaskWork(){
 			$('.timer .step-btn').attr('step-state','end').html('完成').addClass('active');
 		},2000);
 	},1000);
-
 	failInterval2 = setInterval(function(){
 		if($(".problem-failed").is(":visible") == false){
 			return;

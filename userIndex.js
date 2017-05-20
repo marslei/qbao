@@ -7,18 +7,11 @@ pageInterval = setInterval(function(){
 		log($(this).text());
 		document.execCommand('copy');
 		notifyMe($(this).text() +" 已复制");
-
 	});
-
-
 	$(".site_frame_top").on('dblclick', function () {
 		screenShot($(".u_num_list"), '个人资产['+getNowFormatDate()+']', $(".u_num_list").outerHTML());
 	});
-
-
-},500);	
-
-
+},500);
 打开分销任务 = setInterval(function(){
 	href = $("a:contains(进行中的分销)").attr("href");
 	if(href != null){
