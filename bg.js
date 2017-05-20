@@ -1,3 +1,11 @@
+function printTable(table,data){
+    table.rows
+    .add(print)
+    .draw()
+    .nodes()
+    .to$()
+    .addClass( 'new' );
+}
 function log(info){
     console.log(info);
 }
