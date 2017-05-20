@@ -81,18 +81,6 @@
 	},
 	{
 		"js": ["bg.js",
-		"fuelRecharge.js"],
-		"matches": ["https://vc.qbao.com/fuel/recharge.htm"],
-		"run_at": "document_end"
-	},
-	{
-		"js": ["bg.js",
-		"phoneRecharge.js"],
-		"matches": ["https://vc.qbao.com/web/phone-recharge.htm"],
-		"run_at": "document_end"
-	},
-	{
-		"js": ["bg.js",
 		"payportal.js"],
 		"matches": ["https://payportal.qbao.com/payportal/main.html",
 		"http://payportal.qbao.com/payportal/main.html"],
