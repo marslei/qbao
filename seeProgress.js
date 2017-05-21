@@ -16,7 +16,7 @@ function checkProgress(){
 		progressNum = $(".progress-num").text();
 		if(/3\/3/.test(progressNum)){
 			console.log("checkProgress,关闭当前页面");
-			closeThisWindow(10*1000);
+			closeThisWindow(5*1000);
 			return true;
 		}
 	}
@@ -24,7 +24,7 @@ function checkProgress(){
 		studyBtn = $(".study-btn").text();
 		if(/已完成.*/.test(studyBtn)){
 			console.log("checkProgress,关闭当前页面");
-			closeThisWindow(10*1000);
+			closeThisWindow(5*1000);
 			return true;
 		}
 	}
