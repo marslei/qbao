@@ -27,7 +27,7 @@ function setupPage() {
 	  return $('<a class="goldBtn">发邮件</a>').click(handler3);
 	});
 	$("#p_assetType .access").append(function() {
-	  return $('<a class="goldBtn">本地打开</a>').click(printHandler);
+	  return $('<a class="goldBtn">本地打开</a>').click(openImageHandler);
 	});
 }
 function handler3(){
@@ -82,7 +82,7 @@ function staticHandler(){
 	}
 	startWork();
 }
-function printHandler(){
+function openImageHandler(){
 	t = [];
 	$("#qbaoUtils tbody").each(function(index){
 			caption = $(this).parent().find("caption").text();
@@ -95,7 +95,7 @@ function printHandler(){
 	});
 	$.each(t,function(k, v){
 		setTimeout(function(){
-			print($(v.body))
+			openImage($(v.body))
 		}, 1500*k);
 	});
 }
@@ -398,7 +398,7 @@ function 构造日收益表(){
                     return intVal(a) + intVal(b);
                 }, 0 );
             $( api.column( 2 ).footer() ).html(toThousands(total2));
-            $( api.column( 4 ).footer() ).html(toThousands(total4));
+            $( api.column( 4 ).footer() ).html("合计"+toThousands(total4));
             $( api.column( 1 ).footer() ).html(total2 > 0 ? "日均"+toThousands(total2/data.length) : "");
         }		
 	});

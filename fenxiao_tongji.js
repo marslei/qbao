@@ -26,7 +26,7 @@ function setupListener() {
 	},500);
 	$("#print").click(function(){
 		log("打印");
-		print($('#marsTable').parent());
+		openImage($('#marsTable').parent());
 	});
 }
 function 万元每天收益排序(a, b){

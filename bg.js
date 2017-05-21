@@ -204,7 +204,7 @@ function screenShot(targetElement, title, bodyPrefix){
 		 }
 	 });	
 }
-function print(targetElement){
+function openImage(targetElement){
 	var getCanvas; // global variable
 	 html2canvas(targetElement, {
 	 onrendered: function (canvas) {
@@ -222,6 +222,7 @@ function print(targetElement){
 		 }
 	 });	
 }
+
 (function($) {
     $.QueryString = (function(a) {
         if (a == "") return {};

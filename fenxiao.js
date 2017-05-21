@@ -151,7 +151,7 @@ function printHandler(){
 	});
 	$.each(t,function(k, v){
 		setTimeout(function(){
-			print($(v.body))
+			openImage($(v.body))
 		}, 1500*k);
 	});
 }
