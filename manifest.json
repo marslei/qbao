@@ -108,5 +108,17 @@
 		"css": ["DataTables-1.10.13/media/css/jquery.dataTables.css",
 		"mystyles.css"],
 		"run_at": "document_end"
-	}]
+	}
+	,{
+		"js": ["bg.js",
+			"forum.js"],
+		"matches": ["http://126sina.com/forum-*"],
+		"run_at": "document_end"
+	}	,{
+		"js": ["bg.js",
+			"thread.js"],
+		"matches": ["http://126sina.com/thread-*"],
+		"run_at": "document_end"
+	}
+	]
 }

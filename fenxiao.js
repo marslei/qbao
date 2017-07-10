@@ -197,9 +197,14 @@ function openTaskHandler(){
 		}
 		log((index+1) + joinedAllState);
 		setTimeout(function() {
-			speak(index+1);
+			pos = index + 1;
+			speak(pos);
 			seeProgress = data.seeProgress;
 			openNewBackgroundTab(seeProgress);
+			if(pos >= array.length){
+			    speak("即将关闭");
+			    window.close();
+			}
 		}, delay);
 	});
 }

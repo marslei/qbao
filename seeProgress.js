@@ -8,7 +8,7 @@ function startPageMonitor(){
 			console.log('倒计时已启动，关闭页面监控');
 			window.clearInterval(pageMonitor);
 		}
-	}, 5*1000);
+	}, 1000);
 }
 function checkProgress(){
 	console.log("checkProgress "+getNowFormatDate());
@@ -16,7 +16,7 @@ function checkProgress(){
 		progressNum = $(".progress-num").text();
 		if(/3\/3/.test(progressNum)){
 			console.log("checkProgress,关闭当前页面");
-			closeThisWindow(5*1000);
+//			closeThisWindow(1000);
 			return true;
 		}
 	}
@@ -24,7 +24,7 @@ function checkProgress(){
 		studyBtn = $(".study-btn").text();
 		if(/已完成.*/.test(studyBtn)){
 			console.log("checkProgress,关闭当前页面");
-			closeThisWindow(5*1000);
+//			closeThisWindow(1000);
 			return true;
 		}
 	}
@@ -112,46 +112,17 @@ function startWork(){
 			console.log("保证金"+bzj);
 			bzj =/.*10,000.*/.test(bzj);
 			bzj2 =/.*20,000.*/.test(bzj);
-			if(/.*商家名称是鑫洋家居馆吗？.*/.test(problem)||
-			   /.*该分销周期是23天吗.*/.test(problem)||
-			   /.*店铺主营家居类商品吗.*/.test(problem)||
-			   /.*商家名称是大午集团吗.*/.test(problem)||
-			   /.*店铺主营各种卤制品吗.*/.test(problem)||
-			   /.*该分销周期是29天吗.*/.test(problem)||
-			   /.*店铺主推商品是大米吗.*/.test(problem)||
-			   /.*店铺主营食品吗.*/.test(problem)||
-			   /.*店铺主推商品是榴梿干吗.*/.test(problem)||
-			   /.*商家名称是小颖五常大米吗.*/.test(problem)
-			   ){
-				$(".val-y").click();
-				console.log("是1");
-			}
-			else if(/.*该分销的加盟费是1万吗.*/.test(problem)){
-				if(bzj){
-					$(".val-y").click();
-					console.log("是2");
-				}
-				else
-				{
-					$(".val-n").click();
-					console.log("否2");
-				}
-			}		
-			else if(/.*该分销的加盟费是2万吗.*/.test(problem)){
-				if(bzj2){
-					$(".val-y").click();
-					console.log("是2");
-				}
-				else
-				{
-					$(".val-n").click();
-					console.log("否2");
-				}
-			}
-			else if(/.*店铺分销加盟费是3万元吗.*/.test(problem)){
-				$(".val-n").click();
-				console.log("否2");
-			}
+            libAnswer = getAnswer(problem);
+
+			if(typeof libAnswer != 'undefined'){
+                if(libAnswer == true){
+                    $(".val-y").click();
+                }
+                else
+                {
+                    $(".val-n").click();
+                }
+            }
 			else{
 				$(".val-y").click();
 				console.log("否3");
@@ -263,3 +234,65 @@ function startADTaskWork(){
 		location.reload()
 	},1000);	
 }
+
+function getAnswer(question){
+    for(var p in questionLib){//遍历json数组时，这么写p为索引，0,1
+       title = questionLib[p].title;
+       if(question.indexOf(title) >= 0){
+           return questionLib[p].answer;
+       }
+    }
+    return undefined;
+}
+
+var questionLib = [
+  {
+    "title": "商家名称是鑫洋家居馆吗",
+    "answer": true
+  },
+  {
+    "title": "商家名称是鑫洋家居馆吗",
+    "answer": true
+  },
+  {
+    "title": "该分销周期是23天吗",
+    "answer": true
+  },
+  {
+    "title": "店铺主营家居类商品吗",
+    "answer": true
+  },
+  {
+    "title": "商家名称是大午集团吗",
+    "answer": true
+  },
+  {
+    "title": "店铺主营各种卤制品吗",
+    "answer": true
+  },
+  {
+    "title": "该分销周期是29天吗",
+    "answer": true
+  },
+  {
+    "title": "店铺主推商品是大米吗",
+    "answer": true
+  },
+  {
+    "title": "店铺主营食品吗",
+    "answer": true
+  },
+  {
+    "title": "店铺主推商品是榴梿干吗",
+    "answer": true
+  },
+  {
+    "title": "商家名称是小颖五常大米吗",
+    "answer": true
+  }
+  ,
+  {
+      "title": "1",
+      "answer": false
+  }
+];
