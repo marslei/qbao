@@ -120,12 +120,6 @@ function save_options_frequency(f){
 	    console.log("frequencyInSeconds= " + f);
 	});
 }
-//alert("bg.js");
-//$(".site_cmtop_status_info .site_cmtop_nav_txt").text("YOU CAN'T NEVER TRACE ME!");
-// function speak(content) {
-    // var msg = new SpeechSynthesisUtterance(content);
-	// window.speechSynthesis.speak(msg);
-// }
 function getNowFormatDate() {
      // return new Date().yyyymmddhhmmss(); 
 	var d = new Date,
