@@ -93,16 +93,6 @@ function addTDClickListener(){
 		log($(this).text() +" 已复制")
 	});
 }
-function SortByName(a, b){
-  var aName = parseFloat(a.p.toLowerCase())/100;
-  var bName = parseFloat(b.p.toLowerCase())/100; 
-  return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
-}
-function 结算日期排序(a, b){
-  var aName = a.结算日期;
-  var bName = b.结算日期; 
-  return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
-}
 function sendMailHandler(){
 	t = [];
 	$("#t2 tbody,#t3 tbody,#t4 tbody,#t1 tbody").each(function(index){
@@ -278,12 +268,15 @@ function statistics(){
 			结算日期 = new Date(date.setTime( date.getTime() + (剩余天数+1) * 86400000 ));
 			结算日期STR = 结算日期.getFullYear()+"-" + (结算日期.getMonth() + 1) + "-" + 结算日期.getDate();
 		}
+
+		万元日收益 = (((收益 / 保证金)/总共天数)*10000).toFixed(2);
 		var joinedAllState = $(data).find(".joined-allState").text().trim();
 		var item = {};
 		item.p = progressPie;
 		item.结算日期 = 结算日期;
 		item.结算日期STR = 结算日期STR;
 		item.收益 = 收益;
+		item.万元日收益 = 万元日收益;
 		item.宝券 = 宝券;
 		item.保证金 = 保证金;
 		item.分销任务地址=分销任务地址;
@@ -312,6 +305,7 @@ function 绘制统计(){
              null,
              data.fxId,
              data.收益,
+             data.万元日收益,
              data.宝券,
              data.保证金,
              data.p + "[" + data.joinedProgress+"]",
@@ -441,6 +435,9 @@ function 做表头(){
 	th.append('收益(元)');
 	tr.append(th);
 	th = $('<th align="left"></th>');
+	th.append('日收益/万');
+	tr.append(th);
+	th = $('<th align="left"></th>');
 	th.append('宝券(元)');
 	tr.append(th);
 	th = $('<th align="left"></th>');
@@ -474,11 +471,7 @@ function 做表头(){
             "searchable": false,
             "orderable": false,
             "targets": 0
-        },
-		{ 
-			width: '25%',
-			targets: 7 
-		}
+        }
 		],
         "order": [[3, 'desc']],
 		"footerCallback": function ( row, data, start, end, display ) {
@@ -495,21 +488,29 @@ function 做表头(){
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            total3 = api
-                .column( 3 )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
             total4 = api
                 .column( 4 )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
+            total5 = api
+                .column( 5 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+             total3 = api
+                .column( 3 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+
             $( api.column( 2 ).footer() ).html(toThousands(total2));
-            $( api.column( 3 ).footer() ).html(toThousands(total3));
             $( api.column( 4 ).footer() ).html(toThousands(total4));
+            $( api.column( 5 ).footer() ).html(toThousands(total5));
         }
 	});
 	进度表.on( 'order.dt search.dt', function () {

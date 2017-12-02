@@ -92,7 +92,7 @@ function 绘制统计(){
         data[i] = [null,
             "<a target='_blank' href='"+任务.url+"'+>" + 任务.任务名称 + "</a>",
             format(任务.收益),
-            format(任务.保证金),
+            format(任务.保证金)+"元<br/>"+format(任务.保证金/10000)+"万",
             任务.任务天数,
             format(任务.万元每天收益),
             toPercent(任务.月_30天_收益率),
@@ -136,7 +136,7 @@ function 做表头(){
 	th.append('收益(元)');
 	tr.append(th);
 	th = $('<th align="left"></th>');
-	th.append('保证金(元)');
+	th.append('保证金');
 	tr.append(th);
 	th = $('<th align="left"></th>');
 	th.append('任务天数');

@@ -3,7 +3,7 @@ taskType = $.QueryString['taskType'];
 function startPageMonitor(){
 	console.log("startPageMonitor");
 	pageMonitor = setInterval(function(){
-		console.log("页面监控["+getNowFormatDate()+"]");
+//		console.log("页面监控["+getNowFormatDate()+"]");
 		if(checkProgress() == true){
 			console.log('倒计时已启动，关闭页面监控');
 			window.clearInterval(pageMonitor);
@@ -11,26 +11,30 @@ function startPageMonitor(){
 	}, 1000);
 }
 function checkProgress(){
-	console.log("checkProgress "+getNowFormatDate());
+//	console.log("checkProgress "+getNowFormatDate());
     if(taskType == 0){
 		progressNum = $(".progress-num").text();
 		if(/3\/3/.test(progressNum)){
 			console.log("checkProgress,关闭当前页面");
-//			closeThisWindow(1000);
+			closeThisWindow(0);
 			return true;
 		}
 	}
-	else if(taskType == 1){
+	else {
 		studyBtn = $(".study-btn").text();
 		if(/已完成.*/.test(studyBtn)){
 			console.log("checkProgress,关闭当前页面");
-//			closeThisWindow(1000);
+			closeThisWindow(0);
 			return true;
 		}
 	}
 	return false;
 }
 function closeThisWindow(timeout){
+    if(timeout <= 0){
+        window.close();
+        return;
+    }
 	timeout = timeout/1000;
 	console.log(timeout+"秒后关闭当前页面");
 	setInterval(function(){
@@ -57,7 +61,7 @@ if(taskType == 0){
 		console.log('先订阅');
 	},1000);
 }
-else if(taskType == 1){
+else {
 	console.log('广告任务');
 	adTaskInterval = setInterval(function(){
 		statusTxt = $(".status-txt").text();
@@ -74,9 +78,7 @@ else if(taskType == 1){
 	},
 	1000);
 }
-else{
-	console.log('为止类型，暂不处理');
-}
+
 function start2(){
 	if($('.checkin-btn').hasClass('disabled') == false){
 		$('.checkin-btn')[0].click();
