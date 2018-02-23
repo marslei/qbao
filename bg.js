@@ -137,7 +137,7 @@ Number.prototype.padLeft = function(base,chr){
    var  len = (String(base || 10).length - String(this).length)+1;
    return len > 0? new Array(len).join(chr || '0')+this : this;
 }
-function sendMail(Subject,Body,Attachment){
+function sendMail(Subject,Body,Attachment,callback){
 	$.post("http://127.0.0.1/mailer/index.php", 
 	{
 		"Subject":Subject,
@@ -146,7 +146,10 @@ function sendMail(Subject,Body,Attachment){
 	},
 	function( data ) {
 		console.log(data);
-		notifyMe(data);
+//		notifyMe(data);
+        if(typeof callback !== "undefined"){
+            callback();
+        }
 	});
 }
 function notifyMe(info) {
